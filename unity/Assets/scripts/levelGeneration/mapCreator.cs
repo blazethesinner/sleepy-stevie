@@ -17,6 +17,7 @@ public class mapCreator : MonoBehaviour {
 	void Start () {
 		matrix = new int[width, height];
 		fill (matrix);
+		complete (matrix);
 		createAreas (matrix);
 	}
 	
@@ -36,6 +37,35 @@ public class mapCreator : MonoBehaviour {
 		}
 	}
 
+	void complete(int[,] matrix){
+		/*
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++){
+				if(matrix[i,j]>0){
+					if (matrix[i+1,j]==0)
+						matrix[i+1,j]=-1;
+					if (matrix[i+1,j+1]==0)
+						matrix[i+1,j]=-1;
+					if (matrix[i,j+1]==0)
+						matrix[i+1,j]=-1;
+					if (matrix[i-1,j+1]==0)
+						matrix[i+1,j]=-1;
+					if (matrix[i-1,j]==0)
+						matrix[i+1,j]=-1;
+					if (matrix[i-1,j-1]==0)
+						matrix[i+1,j]=-1;
+					if (matrix[i,j-1]==0)
+						matrix[i+1,j]=-1;
+					if (matrix[i+1,j-1]==0)
+						matrix[i+1,j]=-1;
+				}
+			}
+		}
+		*/
+	}
+
+
+
 	void createAreas (int[,] matrix){
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++){
@@ -45,7 +75,7 @@ public class mapCreator : MonoBehaviour {
 					Instantiate(region, new Vector3 (i*regionWidth,j*regionHeight,0), Quaternion.identity);
 					break;
 				case 2 :
-
+					Instantiate(blockingRegion, new Vector3 (i*regionWidth,j*regionHeight,0), Quaternion.identity);
 					break;
 				case 3 :
 
