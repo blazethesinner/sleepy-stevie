@@ -1,5 +1,19 @@
+<<<<<<< HEAD
 ### MASTER BRANCH ###
 
 Here is a link to a thread on the Unity forum that has a (pretty big) list of tutorials for Unity. 
 Feel free to refer to these or any you may find of your own accord. (You need a Unity account to view the forum)
 Link to thread: http://answers.unity3d.com/questions/12321/how-can-i-start-learning-unity-fast-list-of-tutori.html
+=======
+### ARJUN'S BRANCH ####
+
+Here is a link to a thread on the Unity forum that has a (pretty big) list of tutorials for Unity. Feel free to refer to these or any you may find of your own accord. (You need a Unity account to view the forum)
+
+Link to thread: http://answers.unity3d.com/questions/12321/how-can-i-start-learning-unity-fast-list-of-tutori.html
+
+For those of us working in Unity:
+Please compress (rar/zip) your project folders before committing to Git. DO NOT upload the project folder as is. 
+It causes problems sometimes. I would suggest having your working project in a seperate folder than your local Git repo. 
+When you want to commit, save all your work, close unity, compress the prpject folder, copy it to the Git repo, commit
+with proper log message. After commit, you may delete the first compressed folder to save disk space.
+>>>>>>> 2232969f02c70bb4b13727435c0896a791aa9bf0
