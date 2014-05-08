@@ -36,13 +36,13 @@ public class mapInterpretator : MonoBehaviour {
 				int code = matrix[i,j];
 				switch (code){
 				case 0: //grass
-					Object.Instantiate(grass, new Vector3 (i+transform.position.x,j+transform.position.y,0), Quaternion.identity);
+					//Object.Instantiate(grass, new Vector3 (j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;	
 				case 1: //rock
-					Object.Instantiate(rock, new Vector3(i+transform.position.x,j+transform.position.y,0), Quaternion.identity);
+					Object.Instantiate(rock, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;
 				case 2: //bush
-					Object.Instantiate(bush, new Vector3(i+transform.position.x,j+transform.position.y,0), Quaternion.identity);
+					Object.Instantiate(bush, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;
 				}
 			}
@@ -62,14 +62,18 @@ public class mapInterpretator : MonoBehaviour {
 				}
 			}
 			matrix [2, 2] = 1;
-			matrix [3, 4] = 2;
+			matrix [3, 4] = 1;
 			break;
 		case 1 :
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++){
-					matrix[i,j]=1;
+					matrix[i,j]=0;
 				}
 			}
+			matrix [2, 2] = 1;
+			matrix [2, 3] = 1;
+			matrix [2, 4] = 1;
+			matrix [2, 5] = 1;
 			break;
 		}
 
