@@ -52,7 +52,7 @@ public class regionCreator : MonoBehaviour {
 	void fill (int [,] matrix){ //basic fonction choosing a
 		int middlex = width / 2;
 		int middley = height / 2;
-		int randomNumber = Random.Range (0, 2);
+		int randomNumber = Random.Range (0, 4);
 
 		switch (randomNumber) {
 		case 0 :
@@ -74,6 +74,40 @@ public class regionCreator : MonoBehaviour {
 			matrix [2, 3] = 1;
 			matrix [2, 4] = 1;
 			matrix [2, 5] = 1;
+			break;
+		case 2 :
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++){
+					matrix[i,j]=0;
+				}
+			}
+			for (int i = 0; i < width; i++) {
+				matrix[i,0]=1;
+				matrix[i,height-1]=1;
+			}
+			for (int j = 0; j < height; j++) {
+				matrix[0,j]=1;
+				matrix[width-1,j]=1;
+			}
+			break;
+		case 3 :
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++){
+					matrix[i,j]=0;
+				}
+			}
+			for (int i = 0; i < width; i++) {
+				matrix[i,0]=1;
+				matrix[i,height-1]=1;
+			}
+			for (int j = 0; j < height; j++) {
+				matrix[0,j]=1;
+				matrix[width-1,j]=1;
+			}
+
+			matrix[6,6]=2;
+			matrix[7,7]=2;
+
 			break;
 		}
 
