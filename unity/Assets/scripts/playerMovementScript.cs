@@ -14,23 +14,22 @@ public class playerMovementScript : MonoBehaviour {
 	void Update () {
 
 		//dumb movement
-		if (Input.GetKey ("up"))
+		if (Input.GetKey ("w"))
 		{
-		
 			//rigidbody2D.AddForce(Vector2.up*10);
 			transform.Translate(Vector2.up * walkSpeed * Time.deltaTime);
 		}
-		if (Input.GetKey ("down"))
+		if (Input.GetKey ("s"))
 		{
 			//rigidbody2D.AddForce(-Vector2.up*10);
 			transform.Translate(-Vector2.up * walkSpeed *Time.deltaTime);
 		}
-		if (Input.GetKey ("left"))
+		if (Input.GetKey ("a"))
 		{
 			//rigidbody2D.AddForce(-Vector2.right*10);
 			transform.Translate(-Vector2.right * walkSpeed *Time.deltaTime);
 		}
-		if (Input.GetKey ("right"))
+		if (Input.GetKey ("d"))
 		{
 			//rigidbody2D.AddForce(Vector2.right*10);
 			transform.Translate(Vector2.right * walkSpeed *Time.deltaTime);
