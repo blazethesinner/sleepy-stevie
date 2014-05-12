@@ -8,7 +8,7 @@ public class mapCreator : MonoBehaviour {
 	public int regionHeight;
 	public int regionWidth;
 	public GameObject region;
-	public GameObject blockingRegion;
+	//public GameObject blockingRegion;
 
 	private int [,] matrix;
 
@@ -76,10 +76,10 @@ public class mapCreator : MonoBehaviour {
 				int tmp = matrix[i,j];
 				switch (tmp){
 				case 1 :
-					Instantiate(region, new Vector3 (i*regionWidth,j*regionHeight,0), Quaternion.identity);
+					Instantiate(region, new Vector3 (i*regionWidth, j*regionHeight,0), Quaternion.identity);
 					break;
 				case 2 :
-					Instantiate(blockingRegion, new Vector3 (i*regionWidth,j*regionHeight,0), Quaternion.identity);
+					//Instantiate(blockingRegion, new Vector3 (i*regionWidth,j*regionHeight,0), Quaternion.identity);
 					break;
 				case 3 :
 
