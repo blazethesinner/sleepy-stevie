@@ -39,10 +39,12 @@ public class regionCreator : MonoBehaviour {
 					//Object.Instantiate(grass, new Vector3 (j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;	
 				case 1: //rock
-					Object.Instantiate(rock, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					GameObject thisRock = (GameObject)Object.Instantiate(rock, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisRock.GetComponent<SpriteRenderer>().sortingOrder =(int)( - (i+transform.position.y));
 					break;
 				case 2: //bush
-					Object.Instantiate(bush, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					GameObject thisBush = (GameObject)Object.Instantiate(bush, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisBush.GetComponent<SpriteRenderer>().sortingOrder =(int)( - (i+transform.position.y));
 					break;
 				}
 			}
