@@ -11,9 +11,10 @@ public class regionCreator : MonoBehaviour {
 
 
 	//public string filename;
-	public GameObject grass;
+
 	public GameObject rock;
 	public GameObject bush;
+	public GameObject tree;
 	private int[,] matrix;
 
 	// Use this for initialization
@@ -35,16 +36,19 @@ public class regionCreator : MonoBehaviour {
 			for (int j = 0; j < height; j++){
 				int code = matrix[i,j];
 				switch (code){
-				case 0: //grass
-					//Object.Instantiate(grass, new Vector3 (j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+				case 0: //grass : do nothing
 					break;	
 				case 1: //rock
 					GameObject thisRock = (GameObject)Object.Instantiate(rock, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
-					thisRock.GetComponent<SpriteRenderer>().sortingOrder =(int)( - (i+transform.position.y));
+					thisRock.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
 				case 2: //bush
 					GameObject thisBush = (GameObject)Object.Instantiate(bush, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
-					thisBush.GetComponent<SpriteRenderer>().sortingOrder =(int)( - (i+transform.position.y));
+					thisBush.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					break;
+				case 3 : //tree
+					GameObject thisTree = (GameObject)Object.Instantiate(tree, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisTree.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
 				}
 			}
@@ -54,7 +58,7 @@ public class regionCreator : MonoBehaviour {
 	void fill (int [,] matrix){ //basic fonction choosing a
 		int middlex = width / 2;
 		int middley = height / 2;
-		int randomNumber = Random.Range (0, 4);
+		int randomNumber = Random.Range (0, 5);
 
 		switch (randomNumber) {
 		case 0 :
@@ -92,7 +96,7 @@ public class regionCreator : MonoBehaviour {
 				matrix[width-1,j]=1;
 			}
 			break;
-		case 3 :
+		/*case 3 :
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++){
 					matrix[i,j]=0;
@@ -110,6 +114,56 @@ public class regionCreator : MonoBehaviour {
 			matrix[6,6]=2;
 			matrix[7,7]=2;
 
+			break;
+			*/
+		case 3 :
+			 
+			int[,] table3 = new int[,] { 	
+				{ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, 
+				{ 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }, 
+				{ 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1 }, 
+				{ 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1 }, 
+				{ 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1 }, 
+				{ 0, 0, 0, 1, 0, 3, 0, 3, 0, 3, 0, 0, 1, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1 }, 
+				{ 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
+				{ 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
+				{ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 }
+								};
+			
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++){
+					matrix[i,j]=table3[i,j];
+				}
+			}
+
+			break;
+
+		case 4 :
+			int[,] table4 = new int[,] { 	
+				{ 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, 
+				{ 0, 0, 0, 2, 2, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 }, 
+				{ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
+				{ 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1 }, 
+				{ 1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0 }, 
+				{ 0, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+				{ 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 2, 1, 3, 0, 0, 0 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, 
+				{ 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1 }, 
+				{ 1, 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 }
+			};
+			
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++){
+					matrix[i,j]=table4[i,j];
+				}
+			}
 			break;
 		}
 

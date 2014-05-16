@@ -37,7 +37,7 @@ public class playerMovementScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//update rendering layer
-		spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int) (-transform.position.y) +1;
+		spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int) (-2*transform.position.y) +2;
 
 		if (Input.GetKey ("space") && ((Time.time-lastTimeOn)>0.1))
 		{
