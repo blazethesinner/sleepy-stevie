@@ -14,6 +14,8 @@ public class regionCreator : MonoBehaviour {
 	public GameObject grass;
 	public GameObject rock;
 	public GameObject bush;
+
+	public GameObject battery;
 	private int[,] matrix;
 
 	// Use this for initialization
@@ -46,6 +48,11 @@ public class regionCreator : MonoBehaviour {
 					GameObject thisBush = (GameObject)Object.Instantiate(bush, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					thisBush.GetComponent<SpriteRenderer>().sortingOrder =(int)( - (i+transform.position.y));
 					break;
+
+				case 4 : // battery
+					GameObject thisBattery = (GameObject)Object.Instantiate(battery, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisBattery.GetComponent<SpriteRenderer>().sortingOrder =(int)( - (i+transform.position.y));
+					break;
 				}
 			}
 		}
@@ -64,7 +71,8 @@ public class regionCreator : MonoBehaviour {
 				}
 			}
 			matrix [2, 2] = 1;
-			matrix [3, 4] = 1;
+			matrix [3, 4] = 4;
+
 			break;
 		case 1 :
 			for (int i = 0; i < width; i++) {
