@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\otherScenes\menu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GUIBarScript.cs">
     <Files>
-      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="14" Column="40" />
-      <File FileName="Assets\scripts\otherScenes\options.cs" Line="32" Column="79" />
+      <File FileName="Assets\GUIBarScript.cs" Line="17" Column="30" />
+      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="6" Column="2" />
+      <File FileName="Assets\scripts\otherScenes\options.cs" Line="14" Column="105" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
