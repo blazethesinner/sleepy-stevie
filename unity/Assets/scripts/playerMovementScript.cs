@@ -5,6 +5,8 @@ public class playerMovementScript : MonoBehaviour {
 
 	public float walkSpeed= 10;
 
+	public static string hasWon = "no";
+
 	public Sprite leftOff;
 	public Sprite rightOff;
 	public Sprite upOff;
@@ -38,20 +40,26 @@ public class playerMovementScript : MonoBehaviour {
 	void Update () {
 		//update rendering layer
 		spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int) (-2*transform.position.y) +2;
-
-		if (Input.GetKey ("space") && ((Time.time-lastTimeOn)>0.1))
-		{
-			lastTimeOn=Time.time;
-			isOn=!isOn;
-			if(isOn){
-				light.GetComponent<SpriteRenderer>().sprite=flashlight;
-			}
-			else{
-				light.GetComponent<SpriteRenderer>().sprite=nolight;
+		if (isOn && LightBehaviour.batteryLife > 0) {
+			LightBehaviour.batteryLife -= .2;
+		}
+		if (LightBehaviour.batteryLife <= 0) {
+			isOn = false;
+			LightBehaviour.batteryLife = 0;
+			light.transform.localEulerAngles = new Vector3 (0, 0, 0);
+			light.transform.localPosition = new Vector3 (3,-1, 0);
+		} 
+		else {
+			if (Input.GetKey ("space") && ((Time.time - lastTimeOn) > 0.1)) {
+				lastTimeOn = Time.time;
+				isOn = !isOn;
+				if (isOn) {
+					light.GetComponent<SpriteRenderer> ().sprite = flashlight;
+				} else {
+					light.GetComponent<SpriteRenderer> ().sprite = nolight;
+				}
 			}
 		}
-
-
 		//changing direction according to inputs
 		if (Input.GetKey ("w") && !Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
 			direction = "up";	
@@ -126,7 +134,29 @@ public class playerMovementScript : MonoBehaviour {
 			else
 				spriterenderer.GetComponent<SpriteRenderer> ().sprite = rightOff;
 		}
+
+
 	}
 
+	void OnTriggerEnter2D(Collider2D otherCollider){
+		battery bat = otherCollider.gameObject.GetComponent<battery> ();
+		tent t = otherCollider.gameObject.GetComponent<tent> ();
+
+		if (bat != null) {
+			LightBehaviour.batteryLife += bat.charge;
+			Destroy(bat.gameObject);
+		}
+		//tent not working yet
+		if (t != null) {
+			playerMovementScript.hasWon = "Yes!";
+		}
+
+	}
+
+
+	void OnGUI(){
+		GUI.Label (new Rect (100, 100, 10000, 20), "Flashlight " + LightBehaviour.batteryLife.ToString()); 
+		GUI.Label (new Rect (100, 200, 10000, 20), "Has player won? " + playerMovementScript.hasWon); 
+	}
 
 }

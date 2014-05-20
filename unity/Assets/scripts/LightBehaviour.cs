@@ -7,6 +7,8 @@ public class LightBehaviour : MonoBehaviour {
 	public Sprite flashlight;
 	public Sprite nolight;
 
+	public static double batteryLife = 100;
+
 	private bool isOn;
 	private float lastTimeOn;
 	private string direction;
@@ -36,7 +38,7 @@ public class LightBehaviour : MonoBehaviour {
 
 		//changing direction accordingly to inputs
 		if (Input.GetKey ("w")) {
-			direction = "up";	
+			direction = "up";
 		}
 		if (Input.GetKey ("s")) {
 			direction = "down";
