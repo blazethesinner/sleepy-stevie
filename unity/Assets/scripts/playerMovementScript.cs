@@ -48,6 +48,7 @@ public class playerMovementScript : MonoBehaviour {
 			LightBehaviour.batteryLife = 0;
 			light.transform.localEulerAngles = new Vector3 (0, 0, 0);
 			light.transform.localPosition = new Vector3 (3,-1, 0);
+			light.GetComponent<SpriteRenderer> ().sprite = nolight; //added this to your code : making light turning off properly :p
 		} 
 		else {
 			if (Input.GetKey ("space") && ((Time.time - lastTimeOn) > 0.1)) {

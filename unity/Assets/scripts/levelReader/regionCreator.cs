@@ -15,6 +15,7 @@ public class regionCreator : MonoBehaviour {
 	public GameObject rock;
 	public GameObject bush;
 	public GameObject tree;
+	public GameObject battery;
 	private int[,] matrix;
 
 	// Use this for initialization
@@ -49,6 +50,10 @@ public class regionCreator : MonoBehaviour {
 				case 3 : //tree
 					GameObject thisTree = (GameObject)Object.Instantiate(tree, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					thisTree.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					break;
+				case 4 : 
+					GameObject thisBattery = (GameObject)Object.Instantiate(battery, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisBattery.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
 				}
 			}
@@ -172,6 +177,7 @@ public class regionCreator : MonoBehaviour {
 		matrix [width-1, middley] = 0;
 		matrix [middlex, 0] = 0;
 		matrix [middlex, height-1] = 0;
+		matrix [2, 2] = 4;
 
 	}
 
