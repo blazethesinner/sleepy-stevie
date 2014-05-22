@@ -14,7 +14,8 @@ public class RabbitBehaviour :  MonoBehaviour {
 	public state myState;
 	public behaviour myBehaviour;
 	public order myOrder;
-	
+
+	public GameObject map;
 	
 	
 	
@@ -61,12 +62,23 @@ public class RabbitBehaviour :  MonoBehaviour {
 
 	void Start(){
 		myOrder = order.left;
+		map = GameObject.Find ("map");
 	}
 
 	void Update(){
 		updateState ();
 		computeAI ();
 		applyOrder ();
+	}
+
+	//debug
+	void OnGUI(){
+		int xR = (int)((transform.position.x) / 19);
+		int yR = (int)((transform.position.y) / 13);
+		int xB = (int)((transform.position.x) % 19);
+		int yB = (int)((transform.position.y) % 13);
+
+		GUI.Label (new Rect (0, 0, 100, 100), "in : " +whatsIn (transform.position) + "\nregion : " + xR +", " +yR + "\nblock : " + xB + ", " + yB );
 	}
 	
 	public void updateState()// change state depending on inlight or not, and changes characteristics
@@ -77,17 +89,20 @@ public class RabbitBehaviour :  MonoBehaviour {
 
 	} 
 
-	void OnCollisionEnter(Collision collide)
-	{
-		if(myOrder==order.right)
-			myOrder=order.left;
-		else
-			myOrder=order.right;
-	}
-
 	public void computeAI()//change order and behaviour depending on lots of things
 	{
-		//ruled by oncollisionenter
+		if (myOrder == order.left) {
+			int tmp = whatsIn(transform.position);
+			if (tmp==1 || tmp ==2 || tmp == 3 || tmp == 4)
+				myOrder= order.right;
+		}
+		else{
+			if (myOrder == order.right){
+				int tmp = whatsIn(transform.position-Vector3.left);
+				if (tmp==1 || tmp ==2 || tmp == 3 || tmp == 4)
+					myOrder= order.left;
+			}
+		}
 	} 
 	
 	public void applyOrder()//move sprite depending on order, play animation according to state, etc
@@ -108,6 +123,17 @@ public class RabbitBehaviour :  MonoBehaviour {
 		default :
 			break;
 		}
+	}
+
+	int whatsIn (Vector3 vec){
+		int xR = (int)((vec.x) / 19);
+		int yR = (int)((vec.y) / 13);
+		int xB = (int)((vec.x) % 19);
+		int yB = (int)((vec.y) % 13);
+		GameObject myRegion = map.GetComponent<mapCreator> ().regionMatrix [yR, xR];
+		int ans = myRegion.GetComponent<regionCreator> ().matrix [yB, xB];
+		print (ans);
+		return ans;
 	}
 
 }

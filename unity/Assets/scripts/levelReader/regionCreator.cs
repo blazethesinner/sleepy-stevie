@@ -52,13 +52,13 @@ public class regionCreator : MonoBehaviour {
 					GameObject thisTree = (GameObject)Object.Instantiate(tree, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					thisTree.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
-				case 4 : //battery
+				case 5 : //battery
 					GameObject thisBattery = (GameObject)Object.Instantiate(battery, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					thisBattery.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
-				case 5 : //rabbit
-					GameObject thisRabbit = (GameObject)Object.Instantiate(rabbit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
-					thisRabbit.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+				case 6 : //rabbit
+					//GameObject thisRabbit = (GameObject)Object.Instantiate(rabbit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					//thisRabbit.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
 				default :
 					break;
@@ -108,26 +108,7 @@ public class regionCreator : MonoBehaviour {
 				matrix[width-1,j]=1;
 			}
 			break;
-		/*case 3 :
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++){
-					matrix[i,j]=0;
-				}
-			}
-			for (int i = 0; i < width; i++) {
-				matrix[i,0]=1;
-				matrix[i,height-1]=1;
-			}
-			for (int j = 0; j < height; j++) {
-				matrix[0,j]=1;
-				matrix[width-1,j]=1;
-			}
 
-			matrix[6,6]=2;
-			matrix[7,7]=2;
-
-			break;
-			*/
 		case 3 :
 			 
 			int[,] table3 = new int[,] { 	
@@ -136,10 +117,10 @@ public class regionCreator : MonoBehaviour {
 				{ 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1 }, 
 				{ 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1 }, 
 				{ 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1 }, 
-				{ 0, 0, 0, 1, 0, 3, 0, 3, 0, 3, 0, 0, 1, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 1, 0, 3, 4, 3, 4, 3, 4, 0, 1, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0 }, 
 				{ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 }, 
-				{ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 }, 
-				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 0, 1, 0, 0, 1, 1, 0, 1 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1 }, 
 				{ 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1 }, 
 				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
 				{ 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
@@ -160,13 +141,13 @@ public class regionCreator : MonoBehaviour {
 				{ 0, 0, 0, 2, 2, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 }, 
 				{ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
 				{ 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1 }, 
-				{ 1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0 }, 
-				{ 0, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0 }, 
-				{ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0 }, 
-				{ 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
-				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0 }, 
-				{ 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 2, 1, 3, 0, 0, 0 }, 
-				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, 
+				{ 1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 4, 0, 3, 0, 0, 0, 0 }, 
+				{ 0, 0, 0, 0, 0, 3, 4, 3, 4, 3, 4, 4, 4, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 3, 4, 0, 0, 1, 0, 0, 0 }, 
+				{ 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+				{ 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 2, 1, 3, 4, 0, 0 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 4, 4, 0, 1 }, 
 				{ 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1 }, 
 				{ 1, 2, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 }
 			};
@@ -186,9 +167,7 @@ public class regionCreator : MonoBehaviour {
 		matrix [middlex, height-1] = 0;
 
 		//making batteries ! Everywhere !
-		matrix [2, 2] = 4;
-
-
+		matrix [2, 2] = 5;
 	}
 
 }

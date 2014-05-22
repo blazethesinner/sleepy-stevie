@@ -11,11 +11,12 @@ public class mapCreator : MonoBehaviour {
 	public GameObject blockingRegion;
 
 	public int [,] matrix;
-
+	public GameObject [,] regionMatrix;
 
 	// Use this for initialization
 	void Start () {
 		matrix = new int[width, height];
+		regionMatrix = new GameObject[width, height];
 		fill (matrix);
 		complete (matrix);
 		createAreas (matrix);
@@ -85,7 +86,8 @@ public class mapCreator : MonoBehaviour {
 				int tmp = matrix[i,j];
 				switch (tmp){
 				case 1 :
-					Instantiate(region, new Vector3 (i*regionWidth, j*regionHeight,0), Quaternion.identity);
+					GameObject myRegion = (GameObject)Instantiate(region, new Vector3 (i*regionWidth, j*regionHeight,0), Quaternion.identity);
+					regionMatrix[i,j] = myRegion;
 					break;
 				case -1 :
 					Instantiate(blockingRegion, new Vector3 (i*regionWidth,j*regionHeight,0), Quaternion.identity);
