@@ -1,10 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\RabbitBehaviour.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\levelGeneration\mapCreator.cs">
     <Files>
+      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="18" Column="18" />
       <File FileName="Assets\scripts\otherScenes\menu.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\otherScenes\options.cs" Line="1" Column="1" />
-      <File FileName="Assets\RabbitBehaviour.cs" Line="62" Column="9" />
+      <File FileName="Assets\scripts\ennemies\RabbitBehaviour.cs" Line="63" Column="24" />
+      <File FileName="Assets\scripts\playerMovementScript.cs" Line="106" Column="67" />
+      <File FileName="Assets\scripts\levelGeneration\mapCreator.cs" Line="103" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

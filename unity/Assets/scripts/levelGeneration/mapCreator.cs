@@ -10,7 +10,7 @@ public class mapCreator : MonoBehaviour {
 	public GameObject region;
 	public GameObject blockingRegion;
 
-	private int [,] matrix;
+	public int [,] matrix;
 
 
 	// Use this for initialization

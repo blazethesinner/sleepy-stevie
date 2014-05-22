@@ -3,6 +3,9 @@ using System.Collections;
 
 public class RabbitBehaviour :  MonoBehaviour {
 
+	public int maxHealth;
+	public int walkSpeed;
+
 	private int health;
 	public enum state {light, dark};
 	public enum behaviour {noMove, chasingTarget, wander};
@@ -54,10 +57,57 @@ public class RabbitBehaviour :  MonoBehaviour {
 			return "";
 		}
 	}
+
+
+	void Start(){
+		myOrder = order.left;
+	}
+
+	void Update(){
+		updateState ();
+		computeAI ();
+		applyOrder ();
+	}
 	
-	public void updateState(){} // change state depending on inlight or not, and changes characteristics
+	public void updateState()// change state depending on inlight or not, and changes characteristics
+	{
+		myState = state.light; //for now, the state doesn't change
+
+
+
+	} 
+
+	void OnCollisionEnter(Collision collide)
+	{
+		if(myOrder==order.right)
+			myOrder=order.left;
+		else
+			myOrder=order.right;
+	}
+
+	public void computeAI()//change order and behaviour depending on lots of things
+	{
+		//ruled by oncollisionenter
+	} 
 	
-	public void computeAI(){} //change order and behaviour depending on lots of things
-	
-	public void applyOrder(){} //move sprite depending on order
+	public void applyOrder()//move sprite depending on order, play animation according to state, etc
+	{
+		switch (myOrder) {
+		case order.right :
+			transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
+			break;
+		case order.left :
+			transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
+			break;
+		case order.up :
+			transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
+			break;
+		case order.down :
+			transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
+			break;
+		default :
+			break;
+		}
+	}
+
 }
