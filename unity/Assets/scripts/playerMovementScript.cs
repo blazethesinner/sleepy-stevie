@@ -5,8 +5,8 @@ public class playerMovementScript : MonoBehaviour {
 
 	public float walkSpeed= 10;
 
-	public static string hasWon = "no";
-	public static int life = 3;
+	public static string hasWon;
+	public static int life;
 
 	public bool isPaused = false;
 	private float lastTimePaused;
@@ -38,13 +38,16 @@ public class playerMovementScript : MonoBehaviour {
 		isOn = true;
 		light.GetComponent<SpriteRenderer>().sprite=flashlight;
 		lastTimeOn = Time.time;
+		hasWon = "no";
+		life = 3;
+		LightBehaviour.batteryLife = 100;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!isPaused) {
 						//update rendering layer
-						spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y) + 2;
+						spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y);
 						if (isOn && LightBehaviour.batteryLife > 0) {
 								LightBehaviour.batteryLife -= .2;
 						}
@@ -90,23 +93,23 @@ public class playerMovementScript : MonoBehaviour {
 						if (isOn) {
 								if (direction == "up") {
 										light.transform.localEulerAngles = new Vector3 (0, 0, 270);
-										light.transform.localPosition = new Vector3 (0, 8, 0);
+										light.transform.localPosition = new Vector3 (0, 2, 0);
 								}
 								if (direction == "down") {
 										light.transform.localEulerAngles = new Vector3 (0, 0, 90);
-										light.transform.localPosition = new Vector3 (0, -8, 0);
+										light.transform.localPosition = new Vector3 (0, -2, 0);
 								}
 								if (direction == "left") {
 										light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-										light.transform.localPosition = new Vector3 (-8, 0, 0);
+										light.transform.localPosition = new Vector3 (-2, 0, 0);
 								}
 								if (direction == "right") {
 										light.transform.localEulerAngles = new Vector3 (0, 0, 180);
-										light.transform.localPosition = new Vector3 (8, 0, 0);
+										light.transform.localPosition = new Vector3 (2, 0, 0);
 								}
 						} else {
 								light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-								light.transform.localPosition = new Vector3 (3, -1, 0);
+								light.transform.localPosition = new Vector3 (0.75f, -0.25f, 0);
 						}
 
 
@@ -169,7 +172,7 @@ public class playerMovementScript : MonoBehaviour {
 		}
 		//hook up to win game screen
 		if (t != null) {
-			playerMovementScript.hasWon = "Yes!";//this can be replaced by the view switcher
+			Application.LoadLevel ("youWon");
 		}
 
 		if (p != null) {
@@ -177,7 +180,7 @@ public class playerMovementScript : MonoBehaviour {
 				playerMovementScript.life -= 1;
 			} else {
 				playerMovementScript.life = 0;
-				//show lose game screen here
+				Application.LoadLevel ("youLose");
 			}
 		}
 

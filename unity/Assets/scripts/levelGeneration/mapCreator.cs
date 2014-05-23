@@ -31,14 +31,13 @@ public class mapCreator : MonoBehaviour {
 	void fill(int [,] matrix){
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++){
-				matrix [1, 1] = 1; // start
+				matrix [1, 1] = 2; // start
 				matrix[1,2]=1;
 				matrix[2,2]=1;
 				matrix[2,1]=1;
 				matrix[3,1]=1;
 				matrix[3,2]=1;
-				matrix[3,3]=1;
-
+				matrix[3,3]=3; //camp
 			}
 		}
 	}
@@ -88,11 +87,25 @@ public class mapCreator : MonoBehaviour {
 				case 1 :
 					GameObject myRegion = (GameObject)Instantiate(region, new Vector3 (i*regionWidth, j*regionHeight,0), Quaternion.identity);
 					regionMatrix[i,j] = myRegion;
+					myRegion.GetComponent<regionCreator>().isSpawn=false;
+					myRegion.GetComponent<regionCreator>().isCamp=false;
 					break;
 				case -1 :
 					Instantiate(blockingRegion, new Vector3 (i*regionWidth,j*regionHeight,0), Quaternion.identity);
 					break;
+				case 2 :
+					GameObject mySpawn = (GameObject)Instantiate(region, new Vector3 (i*regionWidth, j*regionHeight,0), Quaternion.identity);
+					regionMatrix[i,j] = mySpawn;
+					mySpawn.GetComponent<regionCreator>().isSpawn=true;
+					mySpawn.GetComponent<regionCreator>().isCamp=false;
+					break;
 				case 3 :
+					GameObject myCamp = (GameObject)Instantiate(region, new Vector3 (i*regionWidth, j*regionHeight,0), Quaternion.identity);
+					regionMatrix[i,j] = myCamp;
+					myCamp.GetComponent<regionCreator>().isSpawn=false;
+					myCamp.GetComponent<regionCreator>().isCamp=true;
+
+					break;
 
 					break;
 				}

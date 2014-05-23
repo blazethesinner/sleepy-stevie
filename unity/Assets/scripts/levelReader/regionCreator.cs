@@ -9,7 +9,8 @@ public class regionCreator : MonoBehaviour {
 	public int width;
 	public int height;
 
-
+	public bool isSpawn;
+	public bool isCamp;
 	//public string filename;
 
 	public GameObject rock;
@@ -17,6 +18,10 @@ public class regionCreator : MonoBehaviour {
 	public GameObject tree;
 	public GameObject battery;
 	public GameObject rabbit;
+	public GameObject player;
+	public GameObject camp;
+	public GameObject pit;
+
 	public int[,] matrix;
 
 	// Use this for initialization
@@ -59,6 +64,18 @@ public class regionCreator : MonoBehaviour {
 				case 6 : //rabbit
 					//GameObject thisRabbit = (GameObject)Object.Instantiate(rabbit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					//thisRabbit.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					break;
+				case 7 : //spawn
+					GameObject thisPlayer = (GameObject)Object.Instantiate(player, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisPlayer.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					break;
+				case 8 : // camp
+					GameObject thisCamp = (GameObject)Object.Instantiate(camp, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisCamp.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					break;
+				case 9 : // pit
+					GameObject thisPit = (GameObject)Object.Instantiate(pit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisPit.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
 				default :
 					break;
@@ -120,10 +137,10 @@ public class regionCreator : MonoBehaviour {
 				{ 0, 0, 0, 1, 0, 3, 4, 3, 4, 3, 4, 0, 1, 0, 0, 1, 0, 0, 0 }, 
 				{ 0, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 0, 1, 0, 0, 1, 0, 0, 0 }, 
 				{ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 }, 
-				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1 }, 
+				{ 1, 0, 0, 1, 0, 9, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1 }, 
 				{ 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1 }, 
 				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
-				{ 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
+				{ 1, 0, 0, 0, 0, 1, 0, 1, 0, 9, 0, 1, 1, 0, 0, 0, 0, 0, 1 }, 
 				{ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 }
 								};
 			
@@ -145,7 +162,7 @@ public class regionCreator : MonoBehaviour {
 				{ 0, 0, 0, 0, 0, 3, 4, 3, 4, 3, 4, 4, 4, 0, 0, 1, 0, 0, 0 }, 
 				{ 0, 0, 0, 1, 0, 4, 4, 4, 4, 4, 4, 3, 4, 0, 0, 1, 0, 0, 0 }, 
 				{ 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0 }, 
-				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+				{ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0 }, 
 				{ 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 2, 1, 3, 4, 0, 0 }, 
 				{ 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 4, 4, 0, 1 }, 
 				{ 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1 }, 
@@ -166,9 +183,18 @@ public class regionCreator : MonoBehaviour {
 		matrix [middlex, 0] = 0;
 		matrix [middlex, height-1] = 0;
 
+		//spawn and camp
+		if (isSpawn) {
+			matrix [3,3] = 7;
+		}
+		if (isCamp) {
+			matrix [3, 3] = 8;
+		}
 		//making batteries ! Everywhere !
 		matrix [2, 2] = 5;
+
 	}
+	
 
 }
 
