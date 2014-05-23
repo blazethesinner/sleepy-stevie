@@ -4,7 +4,7 @@ using System.Collections;
 public class battery : MonoBehaviour
 {
 	//amount battery returns to flashlight
-	public int charge = 20;
+	public int charge = 10;
 	//Will need to make sure bunnies cannot swipe batteries
 	public bool isSteve = false;
 
