@@ -11,6 +11,9 @@ public class menu : MonoBehaviour {
 
 	private bool isSoundOn;
 	private bool isMusicOn;
+
+	public Texture textureShadow;
+
 	void Start(){
 		currentState = state.main;
 		isSoundOn = true;
@@ -31,6 +34,7 @@ public class menu : MonoBehaviour {
 			}
 			GameObject.Find("SleepyStevie").GetComponent<SpriteRenderer>().enabled = true;
 			GameObject.Find("Options").GetComponent<SpriteRenderer>().enabled = false;
+			moveShadow();
 			//GUI.Label (new Rect (100, 100, 760, 100), "Sleepy Stevie", titleStyle);
 		}
 
@@ -50,8 +54,18 @@ public class menu : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 200, 200, 50), "Back To Menu", styleButtons))
 				currentState=state.main;
 			GameObject.Find("SleepyStevie").GetComponent<SpriteRenderer>().enabled = false;
+			moveShadow();
 			GameObject.Find("Options").GetComponent<SpriteRenderer>().enabled = true;
 		}
+
+
+
+
+	}
+
+	void moveShadow(){
+		Vector3 pos = new Vector3 (Input.mousePosition.x,Input.mousePosition.y,0);
+		GUI.DrawTexture (new Rect (pos.x-3840,-600-pos.y, 7680, 2400), textureShadow);
 	}
 
 	string onOff(bool condition){
