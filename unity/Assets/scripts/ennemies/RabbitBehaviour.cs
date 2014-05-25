@@ -16,8 +16,15 @@ public class RabbitBehaviour :  MonoBehaviour {
 	public order myOrder;
 
 	public GameObject map;
-	
-	
+
+
+	//collider boxes for detection of walls
+	private BoxCollider2D leftBox;
+	private BoxCollider2D rightBox;
+	private BoxCollider2D topBox;
+	private BoxCollider2D botBox;
+
+
 	
 	// Use this for initialization
 	public static string toString(state sta){
@@ -61,7 +68,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 
 
 	void Start(){
-		myOrder = order.left;
+		myOrder = order.stay;
 		map = GameObject.Find ("map");
 	}
 
@@ -72,14 +79,6 @@ public class RabbitBehaviour :  MonoBehaviour {
 	}
 
 	//debug
-	void OnGUI(){
-		int xR = (int)((transform.position.x) / 19);
-		int yR = (int)((transform.position.y) / 13);
-		int xB = (int)((transform.position.x) % 19);
-		int yB = (int)((transform.position.y) % 13);
-
-		GUI.Label (new Rect (0, 0, 100, 100), "in : " +whatsIn (transform.position) + "\nregion : " + xR +", " +yR + "\nblock : " + xB + ", " + yB );
-	}
 	
 	public void updateState()// change state depending on inlight or not, and changes characteristics
 	{
@@ -91,6 +90,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 
 	public void computeAI()//change order and behaviour depending on lots of things
 	{
+		/*
 		if (myOrder == order.left) {
 			int tmp = whatsIn(transform.position);
 			if (tmp==1 || tmp ==2 || tmp == 3 || tmp == 4)
@@ -103,6 +103,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 					myOrder= order.left;
 			}
 		}
+		*/
 	} 
 	
 	public void applyOrder()//move sprite depending on order, play animation according to state, etc
