@@ -172,7 +172,8 @@ public class playerMovementScript : MonoBehaviour {
 		}
 		//hook up to win game screen
 		if (t != null) {
-			Application.LoadLevel ("youWon");
+			PlayerPrefs.SetInt("hasWon",1);
+			Application.LoadLevel ("endScreen");
 		}
 
 		if (p != null) {
@@ -180,7 +181,8 @@ public class playerMovementScript : MonoBehaviour {
 				playerMovementScript.life -= 1;
 			} else {
 				playerMovementScript.life = 0;
-				Application.LoadLevel ("youLose");
+				PlayerPrefs.SetInt("hasWon",0);
+				Application.LoadLevel ("endScreen");
 			}
 		}
 
