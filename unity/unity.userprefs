@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\2d-platformer\Assets\scripts\playerPhysics.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GUIBarScript.cs">
     <Files>
-      <File FileName="..\..\..\2d-platformer\Assets\scripts\playerPhysics.cs" Line="144" Column="2" />
-      <File FileName="..\..\..\2d-platformer\Assets\scripts\playerControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\GUIBarScript.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\Bucci\Programing\Unity\SleepyStevie\sleepy-stevie\unity\Assets\scripts\ennemies\RabbitBehaviour.cs" Line="235" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
