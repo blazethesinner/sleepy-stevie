@@ -6,6 +6,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 	//characteristics
 	public int maxHealth;
 	public int walkSpeed;
+	public int strength;
 	private int health;
 
 	//enums
@@ -107,7 +108,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 	}
 
 	void Update(){
-		computeAI ();
+		//computeAI ();
 		applyOrder ();
 
 		//timers
@@ -121,75 +122,13 @@ public class RabbitBehaviour :  MonoBehaviour {
 	public void computeAI()//change order and behaviour depending on lots of things
 	{
 		if (myBehaviour==behaviour.wander){
-			/*
-			//todo here : detect player
 
-			// if wandering, the ai changes direction if one of the two following conditions are true :
-			// - walking in a direction where there is an obstacle
-			// - following a wall that "ends"
-			switch (wallFollowed) {
-			case order.down :
-				if (!obstacleBot){
-					changeDirectionWander();
-				}
-				break;
-			case order.up :
-				if (!obstacleTop){
-					changeDirectionWander();
-				}
-				break;
-			case order.left :
-				if (!obstacleLeft){
-					changeDirectionWander();
-				}
-				break;
-			case order.right :
-				if (!obstacleRight){
-					changeDirectionWander();
-				}
-				break;
-
-			case order.stay :
-				wallFollowed = findWallFollowed();
-				break;
-			}
-
-			switch (myOrder){
-			case order.down :
-				if (obstacleBot){
-					changeDirectionWander();
-					wallFollowed=order.down;
-				}
-				break;
-			case order.up :
-				if (obstacleTop){
-					changeDirectionWander();
-					wallFollowed=order.up;
-				}
-				break;
-			case order.left :
-				if (obstacleLeft){
-					changeDirectionWander();
-					wallFollowed=order.left;
-				}
-				break;
-			case order.right :
-				if (obstacleRight){
-					changeDirectionWander();
-					wallFollowed=order.right;
-				}
-				break;
-				
-			default :
-				break;
-			}
-			*/
 		}
 	
 	} 
 
 	public void changeDirectionWander(){
-		print ("change");
+		//print ("change");
 		bool trapped = obstacleBot && obstacleTop && obstacleLeft && obstacleRight;
 		if (trapped)
 			myOrder = order.stay;
@@ -216,7 +155,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 
 			myOrder=testdirection;
 			wallFollowed=findWallFollowed();
-			print ("new dir : " + toString(testdirection)+ " , new wall : " + toString(wallFollowed));
+			//print ("new dir : " + toString(testdirection)+ " , new wall : " + toString(wallFollowed));
 
 		}
 	}

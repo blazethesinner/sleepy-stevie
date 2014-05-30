@@ -12,11 +12,11 @@ public class ennemyBoxes : MonoBehaviour {
 	void Update () {
 	
 	}
-	//void OnTriggerEnter2D(Collider2D other)
-	//{
-	//	if (other.gameObject.tag=="obstacle")
-	//	rabbit.SendMessage (this.name+"enter");
-	//}
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "Player")
+			other.gameObject.GetComponent<playerMovementScript> ().getHit (rabbit.GetComponent<RabbitBehaviour>().strength);
+	}
 	void OnTriggerStay2D(Collider2D other)
 	{
 		if (other.gameObject.tag=="obstacle")

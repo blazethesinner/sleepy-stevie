@@ -13,6 +13,7 @@ public class playerMovementScript : MonoBehaviour {
 	public bool isPaused = false;
 	private float lastTimePaused;
 
+	public Animator myAnimator;
 	public Sprite leftOff;
 	public Sprite rightOff;
 	public Sprite upOff;
@@ -45,6 +46,9 @@ public class playerMovementScript : MonoBehaviour {
 		hasWon = "no";
 		life = 3;
 		LightBehaviour.batteryLife = 100;
+		direction = "top";
+		myAnimator.SetInteger ("direction", 0);
+		myAnimator.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -120,39 +124,47 @@ public class playerMovementScript : MonoBehaviour {
 
 						//dumb movement
 						if (direction == "up") {
-								if (Input.GetKey ("w")) 
+								if (Input.GetKey ("w")) {
 										transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
-								if (isOn)
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = upOn;
+										myAnimator.enabled=true;
+										myAnimator.SetInteger("direction",0);
+								}
 								else
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = upOff;
+										myAnimator.enabled=false;
 						}
 
 						if (direction == "down") {
-								if (Input.GetKey ("s")) 
+								if (Input.GetKey ("s")) {
 										transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
-								if (isOn)
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = downOn;
+										myAnimator.enabled=true;
+										myAnimator.SetInteger("direction",1);
+								}
 								else
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = downOff;
+										myAnimator.enabled=false;
 						}
 
 						if (direction == "left") {
-								if (Input.GetKey ("a")) 
+								if (Input.GetKey ("a")) {
 										transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
-								if (isOn)
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = leftOn;
+										myAnimator.enabled=true;
+										myAnimator.SetInteger("direction",2);
+								}
 								else
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = leftOff;
+										myAnimator.enabled=false;
 						}
 						if (direction == "right") {
-								if (Input.GetKey ("d")) 
+								if (Input.GetKey ("d")) {
 										transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
-								if (isOn)
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = rightOn;
+										myAnimator.enabled=true;
+										myAnimator.SetInteger("direction",3);
+								}
 								else
-										spriterenderer.GetComponent<SpriteRenderer> ().sprite = rightOff;
+										myAnimator.enabled=false;
 						}
+
+				if (life<=0){
+					Application.LoadLevel ("endScreen");
+				}
 				} else {
 			if (Input.GetKey ("p") && ((Time.time - lastTimeOn) > 0.2)) {
 					lastTimePaused = Time.time;
@@ -166,7 +178,7 @@ public class playerMovementScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D otherCollider){
 		battery bat = otherCollider.gameObject.GetComponent<battery> ();
 		tent t = otherCollider.gameObject.GetComponent<tent> ();
-		pit p = otherCollider.gameObject.GetComponent<pit> ();
+		//pit p = otherCollider.gameObject.GetComponent<pit> ();
 
 		if (bat != null) {
 			LightBehaviour.batteryLife += bat.charge - 50; //can't tell why, but it's adding 100 rather than bat.charge's value, might just hardcode
@@ -180,7 +192,7 @@ public class playerMovementScript : MonoBehaviour {
 			PlayerPrefs.SetInt("hasWon",1);
 			Application.LoadLevel ("endScreen");
 		}
-
+		/*
 		if (p != null) {
 			if(playerMovementScript.life > 1){
 				playerMovementScript.life -= 1;
@@ -190,6 +202,7 @@ public class playerMovementScript : MonoBehaviour {
 				Application.LoadLevel ("endScreen");
 			}
 		}
+		*/
 
 	}
 
@@ -199,5 +212,10 @@ public class playerMovementScript : MonoBehaviour {
 		GUI.Label (new Rect (100, 150, 10000, 30), "Has player won? " + playerMovementScript.hasWon); 
 		GUI.Label (new Rect (100, 200, 10000, 40), "Life left " + playerMovementScript.life); 
 	}*/
+
+	public void getHit(int strenght){
+		print ("Aie ! I'm hit !");
+		life --;
+	}
 
 }

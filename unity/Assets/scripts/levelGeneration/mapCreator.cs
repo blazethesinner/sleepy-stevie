@@ -20,7 +20,7 @@ public class mapCreator : MonoBehaviour {
 		fill (matrix);
 		complete (matrix);
 		createAreas (matrix);
-		GameObject.Find ("player").transform.position = new Vector3 (20, 20, 0);
+		//GameObject.Find ("player").transform.position = new Vector3 (20, 20, 0);
 	}
 	
 	// Update is called once per frame
