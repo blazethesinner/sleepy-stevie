@@ -126,40 +126,48 @@ public class playerMovementScript : MonoBehaviour {
 						if (direction == "up") {
 								if (Input.GetKey ("w")) {
 										transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
-										myAnimator.enabled=true;
+										if (!myAnimator.enabled)
+											myAnimator.enabled=true;
 										myAnimator.SetInteger("direction",0);
 								}
 								else
-										myAnimator.enabled=false;
+										if (myAnimator.enabled)
+											myAnimator.enabled=false;
 						}
 
 						if (direction == "down") {
 								if (Input.GetKey ("s")) {
 										transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
-										myAnimator.enabled=true;
+										if (!myAnimator.enabled)
+											myAnimator.enabled=true;
 										myAnimator.SetInteger("direction",1);
 								}
 								else
-										myAnimator.enabled=false;
+										if (myAnimator.enabled)
+											myAnimator.enabled=false;
 						}
 
 						if (direction == "left") {
 								if (Input.GetKey ("a")) {
 										transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
-										myAnimator.enabled=true;
+										if (!myAnimator.enabled)
+											myAnimator.enabled=true;
 										myAnimator.SetInteger("direction",2);
 								}
 								else
-										myAnimator.enabled=false;
+										if (myAnimator.enabled)
+											myAnimator.enabled=false;
 						}
 						if (direction == "right") {
 								if (Input.GetKey ("d")) {
 										transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
-										myAnimator.enabled=true;
+										if (!myAnimator.enabled)
+											myAnimator.enabled=true;
 										myAnimator.SetInteger("direction",3);
 								}
 								else
-										myAnimator.enabled=false;
+										if (myAnimator.enabled)
+											myAnimator.enabled=false;
 						}
 
 				if (life<=0){
