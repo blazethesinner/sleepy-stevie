@@ -33,8 +33,13 @@ public class playerMovementScript : MonoBehaviour {
 
 	private GameObject spriterenderer;
 	private GameObject light;
-	// Use this for initialization
 
+	private AudioClip clip_lightOn;
+	private AudioClip clip_lightOff;
+	private AudioSource lightOn;
+	private AudioSource lightOff;
+
+	// Use this for initialization
 	void Start () {
 		//GameObject map = GameObject.Find ("map");
 		//lightOn = map.GetComponent ("light on1");
@@ -49,6 +54,16 @@ public class playerMovementScript : MonoBehaviour {
 		direction = "top";
 		myAnimator.SetInteger ("direction", 0);
 		myAnimator.enabled = false;
+
+		lightOn = (AudioSource)gameObject.AddComponent ("AudioSource");
+		lightOn.playOnAwake = false;
+		lightOff = (AudioSource)gameObject.AddComponent ("AudioSource");
+
+		clip_lightOn = (AudioClip)Resources.Load ("sfx/lightOn");
+		clip_lightOff = (AudioClip)Resources.Load ("sfx/lightOff");
+
+		lightOn.clip = clip_lightOn;
+		lightOff.clip = clip_lightOff;
 	}
 	
 	// Update is called once per frame
@@ -71,9 +86,10 @@ public class playerMovementScript : MonoBehaviour {
 										isOn = !isOn;
 										if (isOn) {
 												light.GetComponent<SpriteRenderer> ().sprite = flashlight;
-												//lightOn.Play();
+												lightOn.Play();
 										} else {
 												light.GetComponent<SpriteRenderer> ().sprite = nolight;
+												lightOff.Play();
 										}
 								}
 						}
@@ -166,13 +182,18 @@ public class playerMovementScript : MonoBehaviour {
 										myAnimator.SetInteger("direction",3);
 								}
 								else
-										if (myAnimator.enabled)
-											myAnimator.enabled=false;
+									if (myAnimator.enabled)
+										myAnimator.enabled=false;
 						}
 
-				if (life<=0){
-					Application.LoadLevel ("endScreen");
-				}
+					if (life<=0){
+						Application.LoadLevel ("endScreen");
+					}
+					
+					if (Input.GetKeyDown("k")){
+						//swing heeeeere !
+					}
+
 				} else {
 			if (Input.GetKey ("p") && ((Time.time - lastTimeOn) > 0.2)) {
 					lastTimePaused = Time.time;
