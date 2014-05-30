@@ -16,9 +16,9 @@ public class GUIBarScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
-		GUI.Label (new Rect (100, 30, 100, 50), "Battery :" + ((int)LightBehaviour.batteryLife).ToString() + "%", styleButtons);
-		GUI.Label (new Rect (200, 30, 100, 50), "Life :" + playerMovementScript.life, styleButtons);
-		GUI.Label (new Rect (300, 30, 100, 50), "Time :" + (int)Time.time, styleButtons);
+		//GUI.Label (new Rect (100, 30, 100, 50), "Battery :" + ((int)LightBehaviour.batteryLife).ToString() + "%", styleButtons);
+		//GUI.Label (new Rect (200, 30, 100, 50), "Life :" + playerMovementScript.life, styleButtons);
+		GUI.Label (new Rect (250, 30, 100, 300), "Time :" + (int)Time.time, styleButtons);
 		fullBattery = (Texture) Resources.Load ("fullBattery");
 		emptyBattery = (Texture) Resources.Load ("emptyBattery"); 
 		fullHealth = (Texture) Resources.Load ("fullHealth");
@@ -30,9 +30,9 @@ public class GUIBarScript : MonoBehaviour {
 		}
 		
 		
-		GUI.DrawTexture (new Rect (100, 30, 100, 50), emptyBattery);
+		GUI.DrawTexture (new Rect (50, 30, 100, 50), emptyBattery);
 		
-		GUI.BeginGroup (new Rect (100, 30, (int)LightBehaviour.batteryLife, 50));
+		GUI.BeginGroup (new Rect (50, 30, (int)LightBehaviour.batteryLife, 50));
 		GUI.DrawTexture (new Rect (0, 0, 100, 50), fullBattery);
 		
 		GUI.EndGroup ();
@@ -41,10 +41,10 @@ public class GUIBarScript : MonoBehaviour {
 		
 		
 		
-		GUI.DrawTexture (new Rect (200, 30, 100, 50), emptyHealth);
+		GUI.DrawTexture (new Rect (150, 30, 100, 50), emptyHealth);
 		//GUI.DrawTexture (new Rect (200, 30, 100/3 * (int)playerMovementScript.life, 50), fullHealth);
 		
-		GUI.BeginGroup (new Rect (200, 30, 100/3 * (int)playerMovementScript.life, 50));
+		GUI.BeginGroup (new Rect (150, 30, 100/3 * (int)playerMovementScript.life, 50));
 		GUI.DrawTexture (new Rect (0, 0, 100, 50), fullHealth);
 		
 		GUI.EndGroup ();

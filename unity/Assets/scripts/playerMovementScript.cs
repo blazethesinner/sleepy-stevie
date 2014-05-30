@@ -8,6 +8,8 @@ public class playerMovementScript : MonoBehaviour {
 	public static string hasWon;
 	public static int life;
 
+	//public AudioSource lightOn;
+
 	public bool isPaused = false;
 	private float lastTimePaused;
 
@@ -33,6 +35,8 @@ public class playerMovementScript : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
+		//GameObject map = GameObject.Find ("map");
+		//lightOn = map.GetComponent ("light on1");
 		spriterenderer = GameObject.Find ("playerSprite");
 		light = GameObject.Find ("Light");
 		isOn = true;
@@ -49,7 +53,7 @@ public class playerMovementScript : MonoBehaviour {
 						//update rendering layer
 						spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y);
 						if (isOn && LightBehaviour.batteryLife > 0) {
-								LightBehaviour.batteryLife -= .2;
+								LightBehaviour.batteryLife -= .1;
 						}
 						if (LightBehaviour.batteryLife <= 0) {
 								isOn = false;
@@ -63,6 +67,7 @@ public class playerMovementScript : MonoBehaviour {
 										isOn = !isOn;
 										if (isOn) {
 												light.GetComponent<SpriteRenderer> ().sprite = flashlight;
+												//lightOn.Play();
 										} else {
 												light.GetComponent<SpriteRenderer> ().sprite = nolight;
 										}
