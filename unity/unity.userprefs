@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\otherScenes\menu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\levelReader\regionCreator.cs">
     <Files>
-      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="74" Column="7" />
+      <File FileName="Assets\scripts\ennemies\RabbitBehaviour.cs" Line="106" Column="3" />
+      <File FileName="Assets\scripts\playerMovementScript.cs" Line="50" Column="102" />
+      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="204" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

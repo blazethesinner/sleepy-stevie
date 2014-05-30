@@ -16,7 +16,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 	//public state myState;
 	public behaviour myBehaviour;
 	public order myOrder;
-
+	public order lastOrder;
 	//references to game objects
 
 	public GameObject map;
@@ -26,7 +26,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 	private BoxCollider2D topBox;
 	private BoxCollider2D botBox;
 
-
+	public Animator myAnimator;
 
 	//timers
 	private float timeStaying;
@@ -50,6 +50,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 		default :
 			return "";
 		}
+
 	}
 
 	public static string toString (behaviour beh){
@@ -87,30 +88,35 @@ public class RabbitBehaviour :  MonoBehaviour {
 		myOrder = order.stay;
 		timeStaying = 0;
 		map = GameObject.Find ("map");
+		myAnimator.SetInteger ("select", 0);
+		int rand = Random.Range (0, 4);
+		switch (rand) {
+		case 0 :
+			myOrder=order.left;
+			break;
+		case 1 :
+			myOrder=order.right;
+			break;
+		case 2 :
+			myOrder=order.up;
+			break;
+		case 3 :
+			myOrder=order.down;
+			break;
+		}
 	}
 
 	void Update(){
-		//updateState ();
 		computeAI ();
 		applyOrder ();
 
 		//timers
 		timeStaying += Time.deltaTime;
-
-
-		//reset obstacles
-		/*obstacleBot = false;
-		obstacleLeft = false;
-		obstacleRight = false;
-		obstacleTop = false;
-		*/
 	}
 
 	//debug
 	
-	public void updateState()// change state depending on inlight or not, and changes characteristics
-	{
-	} 
+
 
 	public void computeAI()//change order and behaviour depending on lots of things
 	{
@@ -289,19 +295,24 @@ public class RabbitBehaviour :  MonoBehaviour {
 		switch (myOrder) {
 		case order.right :
 			transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
+			myAnimator.SetInteger("select",1);
 			break;
 		case order.left :
 			transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
+			myAnimator.SetInteger("select",3);
 			break;
 		case order.up :
 			transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
+			myAnimator.SetInteger("select",2);
 			break;
 		case order.down :
 			transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
+			myAnimator.SetInteger("select",0);
 			break;
 		default :
 			break;
 		}
+		myAnimator.gameObject.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y);
 	}
 
 
