@@ -18,18 +18,20 @@ public class pit : MonoBehaviour
 		else
 			GetComponentInChildren<SpriteRenderer> ().sprite = off;
 	}
-		
 	// collisions
 	void OnTriggerEnter2D(Collider2D other){
 		if (isReady) {
-						if (other.gameObject.tag == "Player")
+						if (other.gameObject.tag == "Player"){
 								other.gameObject.GetComponent<playerMovementScript> ().getHit (1);
+								isReady = false;
+						}
 						if (other.gameObject.tag == "ennemies") {
-								Object.Destroy (other.gameObject);
+								Object.Destroy (other.gameObject.transform.parent.gameObject);
 								print ("rabbit killed");
+								isReady = false;
 						}
 				}
-		isReady = false;
+
 	}
 }
 
