@@ -60,6 +60,8 @@
      <Compile Include="Assets\scripts\pit.cs" />
      <Compile Include="Assets\scripts\playerMovementScript.cs" />
      <Compile Include="Assets\scripts\tent.cs" />
+     <Compile Include="Assets\swing.cs" />
+     <None Include="Assets\mapTextFiles\Map.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

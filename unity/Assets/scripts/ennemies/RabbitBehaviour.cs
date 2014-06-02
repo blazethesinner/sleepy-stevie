@@ -6,12 +6,14 @@ public class RabbitBehaviour :  MonoBehaviour {
 	//characteristics
 	public int maxHealth;
 	public int walkSpeed;
+	public int pushSpeed;
+	public int speed;
 	public int strength;
 	private int health;
 
 	//enums
 	public enum state {light, dark};
-	public enum behaviour {noMove, chasingTarget, wander};
+	public enum behaviour {noMove, chasingTarget, wander, pushed};
 	public enum order {stay, right, left, up, down};
 
 	//public state myState;
@@ -40,7 +42,10 @@ public class RabbitBehaviour :  MonoBehaviour {
 	public bool obstacleTop;
 	public bool obstacleBot;
 
-	
+	public string directionPushed;
+	public float pushDuration;
+	private float timerPushed;
+
 	// Use this for initialization
 	public static string toString(state sta){
 		switch (sta) {
@@ -53,36 +58,6 @@ public class RabbitBehaviour :  MonoBehaviour {
 		}
 
 	}
-
-	public static string toString (behaviour beh){
-		switch (beh) {
-		case behaviour.chasingTarget :
-			return "chasing target";
-		case behaviour.noMove :
-			return "no move";
-		case behaviour.wander :
-			return "wander";
-		default :
-			return "";
-		}
-	}
-	public static string toString (order ord){
-		switch (ord) {
-		case order.down :
-			return "down";
-		case order.up :
-			return "up";
-		case order.left :
-			return "left";
-		case order.right :
-			return "right";
-		case order.stay :
-			return "stay";
-		default :
-			return "";
-		}
-	}
-
 
 	void Start(){
 		myBehaviour = behaviour.wander;
@@ -108,7 +83,8 @@ public class RabbitBehaviour :  MonoBehaviour {
 	}
 
 	void Update(){
-		//computeAI ();
+		computeAI ();
+
 		applyOrder ();
 
 		//timers
@@ -119,12 +95,21 @@ public class RabbitBehaviour :  MonoBehaviour {
 	
 
 
-	public void computeAI()//change order and behaviour depending on lots of things
+	public void computeAI()//rule the pushed state for now, the wander state is ruled separately
 	{
 		if (myBehaviour==behaviour.wander){
-
+			//nothing
 		}
-	
+
+		if (myBehaviour == behaviour.pushed) {
+			timerPushed += Time.deltaTime;
+			speed= pushSpeed;
+			if (timerPushed > pushDuration)
+				myBehaviour=behaviour.wander;
+		}
+		else {
+			speed=walkSpeed;
+		}
 	} 
 
 	public void changeDirectionWander(){
@@ -233,20 +218,24 @@ public class RabbitBehaviour :  MonoBehaviour {
 	{
 		switch (myOrder) {
 		case order.right :
-			transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
-			myAnimator.SetInteger("select",1);
+			transform.Translate (Vector2.right * speed * Time.deltaTime);
+			if (myBehaviour==behaviour.wander)
+				myAnimator.SetInteger("select",1);
 			break;
 		case order.left :
-			transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
-			myAnimator.SetInteger("select",3);
+			transform.Translate (-Vector2.right * speed * Time.deltaTime);
+			if (myBehaviour==behaviour.wander)
+				myAnimator.SetInteger("select",3);
 			break;
 		case order.up :
-			transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
-			myAnimator.SetInteger("select",2);
+			transform.Translate (Vector2.up * speed * Time.deltaTime);
+			if (myBehaviour==behaviour.wander)
+				myAnimator.SetInteger("select",2);
 			break;
 		case order.down :
-			transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
-			myAnimator.SetInteger("select",0);
+			transform.Translate (-Vector2.up * speed * Time.deltaTime);
+			if (myBehaviour==behaviour.wander)
+				myAnimator.SetInteger("select",0);
 			break;
 		default :
 			break;
@@ -258,50 +247,59 @@ public class RabbitBehaviour :  MonoBehaviour {
 	void leftstay()
 	{
 		obstacleLeft = true;
-		if (myOrder == order.left)
+		if (myOrder == order.left&& myBehaviour==behaviour.wander)
 			changeDirectionWander ();
+		if (myOrder == order.left && myBehaviour==behaviour.pushed)
+			myBehaviour=behaviour.wander;
 	}
 	void rightstay()
 	{
 		obstacleRight = true;
-		if (myOrder == order.right)
+
+		if (myOrder == order.right && myBehaviour==behaviour.wander)
 			changeDirectionWander ();
+		if (myOrder == order.right && myBehaviour==behaviour.pushed)
+			myBehaviour=behaviour.wander;
 	}
 	void topstay()
 	{
 		obstacleTop = true;
-		if (myOrder == order.up)
+		if (myOrder == order.up && myBehaviour==behaviour.wander)
 			changeDirectionWander ();
+		if (myOrder == order.up && myBehaviour==behaviour.pushed)
+			myBehaviour=behaviour.wander;
 	}
 	void bottomstay()
 	{
 		obstacleBot = true;
-		if (myOrder == order.down)
+		if (myOrder == order.down && myBehaviour==behaviour.wander)
 			changeDirectionWander ();
+		if (myOrder == order.down && myBehaviour==behaviour.pushed)
+			myBehaviour=behaviour.wander;
 	}
 	void leftexit()
 	{
 
-		if (!obstacleLeft && wallFollowed == order.left)
+		if (!obstacleLeft && wallFollowed == order.left && myBehaviour==behaviour.wander)
 			changeDirectionWander ();
 		obstacleLeft = false;
 	}
 	void rightexit()
 	{
 		obstacleRight = false;
-		if (!obstacleRight && wallFollowed == order.right)
+		if (!obstacleRight && wallFollowed == order.right && myBehaviour==behaviour.wander)
 			changeDirectionWander ();
 	}
 	void topexit()
 	{
 		obstacleTop = false;
-		if (!obstacleTop && wallFollowed == order.up)
+		if (!obstacleTop && wallFollowed == order.up && myBehaviour==behaviour.wander)
 			changeDirectionWander ();
 	}
 	void bottomexit()
 	{
 		obstacleBot = false;
-		if (!obstacleBot && wallFollowed == order.down)
+		if (!obstacleBot && wallFollowed == order.down && myBehaviour==behaviour.wander)
 			changeDirectionWander ();
 	}
 
@@ -318,6 +316,30 @@ public class RabbitBehaviour :  MonoBehaviour {
 		default :
 			return true;
 		}
+	}
+
+	public void getHit(string direction){
+		print (gameObject.name + " smashed");
+		myBehaviour = behaviour.pushed;
+		timerPushed = 0f;
+		switch (direction){
+		case "up" :
+			myOrder = order.up;
+			break;
+		case "down" :
+			myOrder=order.down;
+			break;
+		case "right" :
+			myOrder=order.right;
+			break;
+		case "left" :
+			myOrder = order.left;
+			break;
+		default :
+			myOrder = order.stay;
+			break;
+		}
+
 	}
 
 }

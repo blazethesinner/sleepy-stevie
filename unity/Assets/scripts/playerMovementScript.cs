@@ -8,6 +8,10 @@ public class playerMovementScript : MonoBehaviour {
 	public static string hasWon;
 	public static int life;
 
+	public float swingDuration;
+	public float swingCoolDown;
+	private float swingCoolDownTimer;
+
 	//public AudioSource lightOn;
 
 	public bool isPaused = false;
@@ -29,10 +33,12 @@ public class playerMovementScript : MonoBehaviour {
 	
 	private bool isOn;
 	private float lastTimeOn;
-	private string direction;
+	public string direction;
 
-	private GameObject spriterenderer;
-	private GameObject light;
+	public GameObject spriterenderer;
+	public GameObject light;
+	public GameObject swing;
+	public GameObject center;
 
 	private AudioClip clip_lightOn;
 	private AudioClip clip_lightOff;
@@ -43,10 +49,10 @@ public class playerMovementScript : MonoBehaviour {
 	void Start () {
 		//GameObject map = GameObject.Find ("map");
 		//lightOn = map.GetComponent ("light on1");
-		spriterenderer = GameObject.Find ("playerSprite");
-		light = GameObject.Find ("Light");
+		//spriterenderer = GameObject.Find ("playerSprite");
+		//light = GameObject.Find ("Light");
 		isOn = true;
-		light.GetComponent<SpriteRenderer>().sprite=flashlight;
+		//light.GetComponent<SpriteRenderer>().sprite=flashlight;
 		lastTimeOn = Time.time;
 		hasWon = "no";
 		life = 3;
@@ -64,6 +70,8 @@ public class playerMovementScript : MonoBehaviour {
 
 		lightOn.clip = clip_lightOn;
 		lightOff.clip = clip_lightOff;
+
+		swingCoolDownTimer = swingCoolDown;
 	}
 	
 	// Update is called once per frame
@@ -77,8 +85,8 @@ public class playerMovementScript : MonoBehaviour {
 						if (LightBehaviour.batteryLife <= 0) {
 								isOn = false;
 								LightBehaviour.batteryLife = 0;
-								light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-								light.transform.localPosition = new Vector3 (3, -1, 0);
+								//light.transform.localEulerAngles = new Vector3 (0, 0, 0);
+								//light.transform.localPosition = new Vector3 (3, -1, 0);
 								light.GetComponent<SpriteRenderer> ().sprite = nolight; //added this to your code : making light turning off properly :p
 						} else {
 								if (Input.GetKey ("space") && ((Time.time - lastTimeOn) > 0.2)) {
@@ -115,27 +123,31 @@ public class playerMovementScript : MonoBehaviour {
 						}
 
 						//light direction
-						if (isOn) {
+						//if (isOn) {
 								if (direction == "up") {
-										light.transform.localEulerAngles = new Vector3 (0, 0, 270);
-										light.transform.localPosition = new Vector3 (0, 2, 0);
+										//light.transform.localEulerAngles = new Vector3 (0, 0, 270);
+										//light.transform.localPosition = new Vector3 (0, 2, 0);
+										center.transform.localEulerAngles = new Vector3 (0, 0, 270);
 								}
 								if (direction == "down") {
-										light.transform.localEulerAngles = new Vector3 (0, 0, 90);
-										light.transform.localPosition = new Vector3 (0, -2, 0);
+										//light.transform.localEulerAngles = new Vector3 (0, 0, 90);
+										//light.transform.localPosition = new Vector3 (0, -2, 0);
+										center.transform.localEulerAngles = new Vector3 (0, 0, 90);
 								}
 								if (direction == "left") {
-										light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-										light.transform.localPosition = new Vector3 (-2, 0, 0);
+										//light.transform.localEulerAngles = new Vector3 (0, 0, 0);
+										//light.transform.localPosition = new Vector3 (-2, 0, 0);
+										center.transform.localEulerAngles = new Vector3 (0, 0, 0);
 								}
 								if (direction == "right") {
-										light.transform.localEulerAngles = new Vector3 (0, 0, 180);
-										light.transform.localPosition = new Vector3 (2, 0, 0);
+										//light.transform.localEulerAngles = new Vector3 (0, 0, 180);
+										//light.transform.localPosition = new Vector3 (2, 0, 0);
+										center.transform.localEulerAngles = new Vector3 (0, 0, 180);
 								}
-						} else {
-								light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-								light.transform.localPosition = new Vector3 (0.75f, -0.25f, 0);
-						}
+						//} else {
+						//		light.transform.localEulerAngles = new Vector3 (0, 0, 0);
+						//		light.transform.localPosition = new Vector3 (0.75f, -0.25f, 0);
+						//}
 
 
 						//dumb movement
@@ -186,13 +198,22 @@ public class playerMovementScript : MonoBehaviour {
 										myAnimator.enabled=false;
 						}
 
+					//death
 					if (life<=0){
 						Application.LoadLevel ("endScreen");
 					}
 					
-					if (Input.GetKeyDown("k")){
-						//swing heeeeere !
+
+					//swing
+					if (Input.GetKeyDown("k") && swingCoolDownTimer>swingCoolDown){
+						swingCoolDownTimer=0f;
+						swing.GetComponent<swing>().duration = swingDuration;
+						swing.SetActive(true);
+						swing.GetComponent<swing>().startSwing();
+				
 					}
+					swingCoolDownTimer+=Time.deltaTime;
+
 
 				} else {
 			if (Input.GetKey ("p") && ((Time.time - lastTimeOn) > 0.2)) {

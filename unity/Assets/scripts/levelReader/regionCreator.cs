@@ -21,7 +21,7 @@ public class regionCreator : MonoBehaviour {
 	public GameObject player;
 	public GameObject camp;
 	public GameObject pit;
-
+	public GameObject bear;
 	public int[,] matrix;
 
 	// Use this for initialization
@@ -65,8 +65,8 @@ public class regionCreator : MonoBehaviour {
 					GameObject thisRabbit = (GameObject)Object.Instantiate(rabbit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;
 				case 7 : //spawn
-					GameObject thisPlayer = (GameObject)Object.Instantiate(player, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
-					thisPlayer.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					//GameObject thisPlayer = (GameObject)Object.Instantiate(player, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					//thisPlayer.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
 				case 8 : // camp
 					GameObject thisCamp = (GameObject)Object.Instantiate(camp, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
@@ -75,6 +75,9 @@ public class regionCreator : MonoBehaviour {
 				case 9 : // pit
 					GameObject thisPit = (GameObject)Object.Instantiate(pit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					thisPit.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					break;
+				case 10 : //bear
+					GameObject thisBear = (GameObject)Object.Instantiate(bear, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;
 				default :
 					break;
@@ -86,7 +89,7 @@ public class regionCreator : MonoBehaviour {
 	void fill (int [,] matrix){ //basic fonction choosing a
 		int middlex = width / 2;
 		int middley = height / 2;
-		int randomNumber = Random.Range (2, 5);
+		int randomNumber = Random.Range (1, 3);
 
 		switch (randomNumber) {
 		case 0 :
@@ -108,6 +111,7 @@ public class regionCreator : MonoBehaviour {
 			matrix [2, 3] = 1;
 			matrix [2, 4] = 1;
 			matrix [2, 5] = 1;
+			matrix [4,4] = 10; //bear
 			break;
 		case 2 :
 			for (int i = 0; i < width; i++) {
