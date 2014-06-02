@@ -12,6 +12,9 @@ public class playerMovementScript : MonoBehaviour {
 	public float swingCoolDown;
 	private float swingCoolDownTimer;
 
+	public float hitCoolDown;
+	private float hitCoolDownTimer;
+
 	//public AudioSource lightOn;
 
 	public bool isPaused = false;
@@ -213,7 +216,7 @@ public class playerMovementScript : MonoBehaviour {
 				
 					}
 					swingCoolDownTimer+=Time.deltaTime;
-
+					hitCoolDownTimer+= Time.deltaTime;
 
 				} else {
 			if (Input.GetKey ("p") && ((Time.time - lastTimeOn) > 0.2)) {
@@ -264,8 +267,11 @@ public class playerMovementScript : MonoBehaviour {
 	}*/
 
 	public void getHit(int strenght){
-		print ("Aie ! I'm hit !");
-		life --;
+		if (hitCoolDownTimer>hitCoolDown){
+			print ("Aie ! I'm hit !");
+			life --;
+			hitCoolDownTimer=0;
+		}
 	}
 
 }

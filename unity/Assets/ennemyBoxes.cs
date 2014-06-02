@@ -14,13 +14,15 @@ public class ennemyBoxes : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "Player")
-			other.gameObject.GetComponent<playerMovementScript> ().getHit (rabbit.GetComponent<RabbitBehaviour>().strength);
+		//if (other.gameObject.tag == "Player")
+		//	other.gameObject.GetComponent<playerMovementScript> ().getHit (rabbit.GetComponent<RabbitBehaviour>().strength);
 	}
 	void OnTriggerStay2D(Collider2D other)
 	{
 		if (other.gameObject.tag=="obstacle")
-		rabbit.SendMessage (this.name+"stay");
+			rabbit.SendMessage (this.name+"stay");
+		if (other.gameObject.tag == "Player")
+			other.gameObject.GetComponent<playerMovementScript> ().getHit (rabbit.GetComponent<RabbitBehaviour>().strength);
 	}
 	void OnTriggerExit2D(Collider2D other)
 	{
