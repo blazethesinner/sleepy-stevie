@@ -55,7 +55,7 @@ public class playerMovementScript : MonoBehaviour {
 		//spriterenderer = GameObject.Find ("playerSprite");
 		//light = GameObject.Find ("Light");
 		isOn = true;
-		//light.GetComponent<SpriteRenderer>().sprite=flashlight;
+		light.GetComponent<SpriteRenderer>().sprite=flashlight;
 		lastTimeOn = Time.time;
 		hasWon = "no";
 		life = 3;

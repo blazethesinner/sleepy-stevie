@@ -65,8 +65,8 @@ public class regionCreator : MonoBehaviour {
 					GameObject thisRabbit = (GameObject)Object.Instantiate(rabbit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;
 				case 7 : //spawn
-					//GameObject thisPlayer = (GameObject)Object.Instantiate(player, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
-					//thisPlayer.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
+					GameObject thisPlayer = (GameObject)Object.Instantiate(player, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
+					thisPlayer.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
 				case 8 : // camp
 					GameObject thisCamp = (GameObject)Object.Instantiate(camp, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
