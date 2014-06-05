@@ -7,8 +7,11 @@ public class GUIBarScript : MonoBehaviour {
 	public GUIStyle flashlightBar;
 	public Texture emptyBattery;
 	public Texture fullBattery;
-	public Texture emptyHealth;
-	public Texture fullHealth;
+	//public Texture emptyHealth;
+	//public Texture fullHealth;
+	public Texture heart;
+	public Texture pearl;
+	public Texture back;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,53 +19,48 @@ public class GUIBarScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
-		//GUI.Label (new Rect (100, 30, 100, 50), "Battery :" + ((int)LightBehaviour.batteryLife).ToString() + "%", styleButtons);
-		//GUI.Label (new Rect (200, 30, 100, 50), "Life :" + playerMovementScript.life, styleButtons);
-		GUI.Label (new Rect (250, 30, 100, 300), "Time :" + (int)Time.time, styleButtons);
-		fullBattery = (Texture) Resources.Load ("fullBattery");
-		emptyBattery = (Texture) Resources.Load ("emptyBattery"); 
-		fullHealth = (Texture) Resources.Load ("fullHealth");
-		emptyHealth = (Texture) Resources.Load ("emptyHealth"); 
+			//GUI.Label (new Rect (100, 30, 100, 50), "Battery :" + ((int)LightBehaviour.batteryLife).ToString() + "%", styleButtons);
+			//GUI.Label (new Rect (200, 30, 100, 50), "Life :" + playerMovementScript.life, styleButtons);
+			GUI.Label (new Rect (260, 30, 100, 300), "Time :" + (int)Time.time, styleButtons);
+			fullBattery = (Texture)Resources.Load ("newfullBattery2");
+			emptyBattery = (Texture)Resources.Load ("newemptyBattery2"); 
+			heart = (Texture)Resources.Load ("heart");
+			pearl = (Texture)Resources.Load ("pearl");
+			back = (Texture)Resources.Load ("guiBackdrop");
+	
+			//fullHealth = (Texture) Resources.Load ("fullHealth");
+			//emptyHealth = (Texture) Resources.Load ("emptyHealth"); 
+	
+			if (!fullBattery || !emptyBattery || !heart || !pearl || !back) {
+					Debug.LogError ("Assign a GUI Texture in the inspector.");
+					return;
+			}
+			//Background of gui
+			GUI.DrawTexture (new Rect (00, 15, 1250, 80), back);
+
+			//Timer
+			GUI.Label (new Rect (1020, 30, 100, 300), "Time :" + (int)Time.time, styleButtons);
+
+			//Battery
+			GUI.DrawTexture (new Rect (50, 40, 100, 30), emptyBattery);
+	
+			GUI.BeginGroup (new Rect (50, 40, (int)LightBehaviour.batteryLife, 30));
+			GUI.DrawTexture (new Rect (0, 0, 100, 30), fullBattery);
+	
+			GUI.EndGroup ();
+	
+			//Health
+			for (int i=1; i<=(int)playerMovementScript.life; i++) {
+					GUI.BeginGroup (new Rect (147 + i * 33, 30, 33, 50));
+					GUI.DrawTexture (new Rect (0, 0, 33, 50), heart);
 		
-		if(!fullBattery || !emptyBattery || !fullHealth || !emptyHealth){
-			Debug.LogError("Assign a GUI Texture in the inspector.");
-			return;
+					GUI.EndGroup ();
+			}
+			for (int i=3; i>(int)playerMovementScript.life; i--) {
+					GUI.BeginGroup (new Rect (147 + i * 33, 30, 33, 50));
+					GUI.DrawTexture (new Rect (0, 0, 33, 50), pearl);
+		
+					GUI.EndGroup ();
+			}
 		}
-		
-		
-		GUI.DrawTexture (new Rect (50, 30, 100, 50), emptyBattery);
-		
-		GUI.BeginGroup (new Rect (50, 30, (int)LightBehaviour.batteryLife, 50));
-		GUI.DrawTexture (new Rect (0, 0, 100, 50), fullBattery);
-		
-		GUI.EndGroup ();
-		
-		
-		
-		
-		
-		GUI.DrawTexture (new Rect (150, 30, 100, 50), emptyHealth);
-		//GUI.DrawTexture (new Rect (200, 30, 100/3 * (int)playerMovementScript.life, 50), fullHealth);
-		
-		GUI.BeginGroup (new Rect (150, 30, 100/3 * (int)playerMovementScript.life, 50));
-		GUI.DrawTexture (new Rect (0, 0, 100, 50), fullHealth);
-		
-		GUI.EndGroup ();
-
-		/* Still working on image
-		 * GUI.DrawTexture (new Rect (100, 30, 100, 50), fullBattery);
-		GUI.Label (new Rect (100, 30, 100, 50), fullBattery, styleButtons);
-
-		GUI.BeginGroup (new Rect (100, 30, 100, 50));
-
-		GUI.Box (new Rect (100, 30, 100, 50), fullBattery, styleButtons);
-
-		//GUI.BeginGroup (new Rect (0, 0, (float) LightBehaviour.batteryLife * 256, 32));
-
-		//GUI.Box (new Rect (0, 0, 256, 32), fullBattery, flashlightBar);
-
-		//GUI.EndGroup ();
-		GUI.EndGroup ();*/
-
-	}
 }

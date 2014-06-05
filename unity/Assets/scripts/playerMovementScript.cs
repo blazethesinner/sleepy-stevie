@@ -48,6 +48,20 @@ public class playerMovementScript : MonoBehaviour {
 	private AudioSource lightOn;
 	private AudioSource lightOff;
 
+	private AudioClip clip_leftFootstep;
+	private AudioClip clip_rightFootstep;
+	private AudioSource leftFoot;
+	private AudioSource rightFoot;
+
+	private AudioClip clip_batteryGet;
+	private AudioSource batteryAudio;
+
+	private AudioClip clip_tentGet;
+	private AudioSource tentAudio;
+
+	private AudioClip clip_swingFL;
+	private AudioSource swingAudio;
+
 	// Use this for initialization
 	void Start () {
 		//GameObject map = GameObject.Find ("map");
@@ -73,8 +87,45 @@ public class playerMovementScript : MonoBehaviour {
 
 		lightOn.clip = clip_lightOn;
 		lightOff.clip = clip_lightOff;
-
+		//debugging, can be removed
+		if (!lightOn || !lightOn.clip) {
+			Debug.LogError ("Assign a Sound in the inspector.");
+			return;
+		}
 		swingCoolDownTimer = swingCoolDown;
+
+		//battery sounds
+		batteryAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_batteryGet = (AudioClip)Resources.Load ("sfx/battery_pickup");
+		batteryAudio.clip = clip_batteryGet;
+
+		//Feet sounds
+		leftFoot = (AudioSource)gameObject.AddComponent ("AudioSource");
+		rightFoot = (AudioSource)gameObject.AddComponent ("AudioSource");
+		
+		clip_leftFootstep = (AudioClip)Resources.Load ("sfx/left_footstep");
+		clip_rightFootstep = (AudioClip)Resources.Load ("sfx/right_footstep");
+
+		leftFoot.clip = clip_leftFootstep;
+		rightFoot.clip = clip_rightFootstep;
+
+		//debugging, can be removed
+		if (!rightFoot || !rightFoot.clip) {
+			Debug.LogError ("Assign a Sound in the inspector.");
+			return;
+		}
+
+
+		//tent sounds
+		tentAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_tentGet = (AudioClip)Resources.Load ("sfx/win state");
+		tentAudio.clip = clip_tentGet;
+
+		//swing sounds
+		swingAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_swingFL = (AudioClip)Resources.Load ("sfx/FL_swing");
+		swingAudio.clip = clip_swingFL;
+
 	}
 	
 	// Update is called once per frame
@@ -113,6 +164,12 @@ public class playerMovementScript : MonoBehaviour {
 
 						//changing direction according to inputs
 						if (Input.GetKey ("w") && !Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
+								if (Time.time%2 == 1){
+									leftFoot.Play();
+								}
+								else{
+									rightFoot.Play();
+								}
 								direction = "up";	
 						}
 						if (!Input.GetKey ("w") && Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
@@ -209,10 +266,12 @@ public class playerMovementScript : MonoBehaviour {
 
 					//swing
 					if (Input.GetKeyDown("k") && swingCoolDownTimer>swingCoolDown){
+						swingAudio.Play ();
 						swingCoolDownTimer=0f;
 						swing.GetComponent<swing>().duration = swingDuration;
 						swing.SetActive(true);
 						swing.GetComponent<swing>().startSwing();
+
 				
 					}
 					swingCoolDownTimer+=Time.deltaTime;
@@ -238,10 +297,12 @@ public class playerMovementScript : MonoBehaviour {
 			if(LightBehaviour.batteryLife > 100){
 				LightBehaviour.batteryLife = 100;
 			}
+			batteryAudio.Play();
 			Destroy(bat.gameObject);
 		}
 		//hook up to win game screen
 		if (t != null) {
+			//tentAudio.Play(); It doesn't play the full duration
 			PlayerPrefs.SetInt("hasWon",1);
 			Application.LoadLevel ("endScreen");
 		}
