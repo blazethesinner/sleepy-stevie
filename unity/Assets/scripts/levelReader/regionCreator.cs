@@ -9,6 +9,8 @@ public class regionCreator : MonoBehaviour {
 	public int width;
 	public int height;
 
+	public fileReader reader;
+
 	public bool isSpawn;
 	public bool isCamp;
 	//public string filename;
@@ -27,6 +29,7 @@ public class regionCreator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		reader = GameObject.Find ("map").GetComponent<fileReader> ();
 		matrix = new int[width,height];
 		fill(matrix);
 		create (matrix);
@@ -87,6 +90,7 @@ public class regionCreator : MonoBehaviour {
 	}
 
 	void fill (int [,] matrix){ //basic fonction choosing a
+		/*
 		int middlex = width / 2;
 		int middley = height / 2;
 		int randomNumber = Random.Range (1, 3);
@@ -188,6 +192,13 @@ public class regionCreator : MonoBehaviour {
 		matrix [width-1, middley] = 0;
 		matrix [middlex, 0] = 0;
 		matrix [middlex, height-1] = 0;
+		*/
+		int rnd = Random.Range (0, reader.numberOfLevels);
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++){
+				matrix[i,j]=reader.matrixArray[rnd,i,j];
+			}
+		}
 
 		//spawn and camp
 		if (isSpawn) {
@@ -196,8 +207,7 @@ public class regionCreator : MonoBehaviour {
 		if (isCamp) {
 			matrix [3, 3] = 8;
 		}
-		//making batteries ! Everywhere !
-		//matrix [2, 2] = 5;
+
 
 	}
 	

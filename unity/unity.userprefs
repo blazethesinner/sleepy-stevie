@@ -1,17 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\playerMovementScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Game Maps.txt">
     <Files>
-      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="72" Column="28" />
-      <File FileName="Assets\scripts\playerMovementScript.cs" Line="255" Column="10" />
-      <File FileName="Assets\swing.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\pit.cs" Line="16" Column="3" />
-      <File FileName="Assets\scripts\levelGeneration\mapCreator.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\ennemies\RabbitBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets\ennemyBoxes.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GUIBarScript.cs" Line="42" Column="28" />
-      <File FileName="Assets\scripts\battery.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\LightBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets\test.txt" Line="8" Column="1" />
+      <File FileName="Assets\Game Maps.txt" Line="45" Column="11" />
+      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="215" Column="2" />
+      <File FileName="Assets\fileReader.cs" Line="43" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
