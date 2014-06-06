@@ -12,6 +12,8 @@ public class playerMovementScript : MonoBehaviour {
 	public float swingCoolDown;
 	private float swingCoolDownTimer;
 
+	public float batteryDropRate;
+
 	public float hitCoolDown;
 	private float hitCoolDownTimer;
 
@@ -134,7 +136,7 @@ public class playerMovementScript : MonoBehaviour {
 						//update rendering layer
 						spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y);
 						if (isOn && LightBehaviour.batteryLife > 0) {
-								LightBehaviour.batteryLife -= .1;
+								LightBehaviour.batteryLife -= Time.deltaTime * batteryDropRate; 
 						}
 						if (LightBehaviour.batteryLife <= 0) {
 								isOn = false;
