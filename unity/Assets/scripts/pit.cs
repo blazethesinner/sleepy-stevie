@@ -5,6 +5,9 @@ public class pit : MonoBehaviour
 {
 	public bool isReady;
 
+	public float resetTime;
+	private float reset;
+
 	public Sprite on;
 	public Sprite off;
 
@@ -16,28 +19,37 @@ public class pit : MonoBehaviour
 		trap = (AudioSource)gameObject.AddComponent ("AudioSource");
 		clip_StevieHit = (AudioClip)Resources.Load ("sfx/stevie_caught_in_trap");
 		trap.clip = clip_StevieHit;
+		reset = 0f;
 	}
 
 	void Update(){
+		reset += Time.deltaTime;
+
 		if (isReady)
-			GetComponentInChildren<SpriteRenderer> ().sprite = on;
-		else
-			GetComponentInChildren<SpriteRenderer> ().sprite = off;
+				GetComponentInChildren<SpriteRenderer> ().sprite = on;
+		else {
+				GetComponentInChildren<SpriteRenderer> ().sprite = off;
+				if(reset>resetTime)
+					isReady=true;
+			}
 	}
 	// collisions
-	void OnTriggerEnter2D(Collider2D other){
+	void OnTriggerStay2D(Collider2D other){
 		if (isReady) {
 						if (other.gameObject.tag == "Player"){
-								other.gameObject.GetComponent<playerMovementScript> ().getHit (1);
-								isReady = false;
-				trap.Play();
+								if(other.gameObject.GetComponent<playerMovementScript>().isVulnerable){
+									other.gameObject.GetComponent<playerMovementScript> ().getHit (1);
+									isReady = false;
+									reset=0f;
+									trap.Play();
+								}
 						}
 						if (other.gameObject.tag == "ennemies") {
 								Object.Destroy (other.gameObject.transform.parent.gameObject);
 								print ("rabbit killed");
 								isReady = false;
 						}
-				}
+		}
 
 	}
 }

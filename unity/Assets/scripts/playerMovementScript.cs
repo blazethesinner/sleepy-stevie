@@ -39,6 +39,7 @@ public class playerMovementScript : MonoBehaviour {
 	private bool isOn;
 	private float lastTimeOn;
 	public string direction;
+	public bool isVulnerable;
 
 	public GameObject spriterenderer;
 	public GameObject light;
@@ -70,6 +71,8 @@ public class playerMovementScript : MonoBehaviour {
 		//lightOn = map.GetComponent ("light on1");
 		//spriterenderer = GameObject.Find ("playerSprite");
 		//light = GameObject.Find ("Light");
+		PlayerPrefs.SetInt("hasWon",0);
+
 		isOn = true;
 		light.GetComponent<SpriteRenderer>().sprite=flashlight;
 		lastTimeOn = Time.time;
@@ -89,6 +92,7 @@ public class playerMovementScript : MonoBehaviour {
 
 		lightOn.clip = clip_lightOn;
 		lightOff.clip = clip_lightOff;
+
 		//debugging, can be removed
 		if (!lightOn || !lightOn.clip) {
 			Debug.LogError ("Assign a Sound in the inspector.");
@@ -185,7 +189,6 @@ public class playerMovementScript : MonoBehaviour {
 						}
 
 						//light direction
-						//if (isOn) {
 								if (direction == "up") {
 										//light.transform.localEulerAngles = new Vector3 (0, 0, 270);
 										//light.transform.localPosition = new Vector3 (0, 2, 0);
@@ -206,10 +209,6 @@ public class playerMovementScript : MonoBehaviour {
 										//light.transform.localPosition = new Vector3 (2, 0, 0);
 										center.transform.localEulerAngles = new Vector3 (0, 0, 180);
 								}
-						//} else {
-						//		light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-						//		light.transform.localPosition = new Vector3 (0.75f, -0.25f, 0);
-						//}
 
 
 						//dumb movement
@@ -276,8 +275,13 @@ public class playerMovementScript : MonoBehaviour {
 
 				
 					}
+					
+					//timers...
+					
 					swingCoolDownTimer+=Time.deltaTime;
 					hitCoolDownTimer+= Time.deltaTime;
+					if (hitCoolDownTimer>hitCoolDown)
+						isVulnerable=true;
 
 				} else {
 			if (Input.GetKey ("p") && ((Time.time - lastTimeOn) > 0.2)) {
@@ -330,10 +334,11 @@ public class playerMovementScript : MonoBehaviour {
 	}*/
 
 	public void getHit(int strenght){
-		if (hitCoolDownTimer>hitCoolDown){
+		if (isVulnerable){
 			print ("Aie ! I'm hit !");
 			life --;
 			hitCoolDownTimer=0;
+			isVulnerable=false;
 		}
 	}
 
