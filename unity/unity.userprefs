@@ -1,14 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\otherScenes\menu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\playerMovementScript.cs">
     <Files>
-      <File FileName="Assets\Game Maps.txt" Line="51" Column="20" />
-      <File FileName="Assets\scripts\playerMovementScript.cs" Line="265" Column="7" />
-      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="108" Column="15" />
-      <File FileName="Assets\scripts\levelGeneration\mapCreator.cs" Line="36" Column="4" />
-      <File FileName="Assets\scripts\GUIBarScript.cs" Line="16" Column="21" />
-      <File FileName="Assets\scripts\otherScenes\endScreen.cs" Line="9" Column="2" />
-      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="77" Column="94" />
+      <File FileName="Assets\scripts\playerMovementScript.cs" Line="355" Column="1" />
+      <File FileName="Assets\scripts\otherScenes\endScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\Game Maps.txt" Line="1" Column="1" />
+      <File FileName="Assets\scripts\playerMovementScript.cs" Line="22" Column="31" />
+      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\levelGeneration\mapCreator.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\GUIBarScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

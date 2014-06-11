@@ -24,19 +24,13 @@ public class endScreen : MonoBehaviour {
 			GameObject.Find("YouLose").GetComponent<SpriteRenderer>().enabled = true;
 			GameObject.Find("YouWon").GetComponent<SpriteRenderer>().enabled = false;
 		}
-		if (isIntro) {
-			introTimer++;
-		}
 
 	}
 	void OnGUI(){
-		if (!isIntro) {
 			GUI.Label (new Rect (Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 75), "TIME : " + PlayerPrefs.GetInt ("timer") + " s", styleTimer);
 
 			if (GUI.Button (new Rect (Screen.width / 2 - 150, Screen.height / 2, 300, 75), "New Game", styleButtons)) {
-				isIntro = true;
-				introTimer=0;
-				//Application.LoadLevel ("game");
+				Application.LoadLevel ("game");
 			}
 			if (GUI.Button (new Rect (Screen.width / 2 - 150, Screen.height / 2 + 100, 300, 75), "Main Menu", styleButtons)) {
 				Application.LoadLevel ("mainMenu");
@@ -44,7 +38,5 @@ public class endScreen : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width / 2 - 150, Screen.height / 2 + 200, 300, 75), "Leave Game", styleButtons)) {
 				Application.Quit ();
 			}
-		}
-
 	}
 }

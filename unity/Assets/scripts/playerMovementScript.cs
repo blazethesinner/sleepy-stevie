@@ -46,6 +46,8 @@ public class playerMovementScript : MonoBehaviour {
 	public GameObject swing;
 	public GameObject center;
 
+	public Texture imagePause;
+
 	private AudioClip clip_lightOn;
 	private AudioClip clip_lightOff;
 	private AudioSource lightOn;
@@ -162,7 +164,7 @@ public class playerMovementScript : MonoBehaviour {
 								}
 						}
 						//pause game
-						if (Input.GetKey ("p") && ((Time.time - lastTimeOn) > 0.2)) {
+						if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
 								lastTimePaused = Time.time;
 								Time.timeScale = 0;	
 								isPaused = true;
@@ -188,27 +190,25 @@ public class playerMovementScript : MonoBehaviour {
 								direction = "right";
 						}
 
+						//light position
+						if (isOn)
+							light.transform.localPosition=new Vector2(-3,0.5f);
+						else
+							light.transform.localPosition=new Vector2(0.3f,0.2f);
+
 						//light direction
-								if (direction == "up") {
-										//light.transform.localEulerAngles = new Vector3 (0, 0, 270);
-										//light.transform.localPosition = new Vector3 (0, 2, 0);
-										center.transform.localEulerAngles = new Vector3 (0, 0, 270);
-								}
-								if (direction == "down") {
-										//light.transform.localEulerAngles = new Vector3 (0, 0, 90);
-										//light.transform.localPosition = new Vector3 (0, -2, 0);
-										center.transform.localEulerAngles = new Vector3 (0, 0, 90);
-								}
-								if (direction == "left") {
-										//light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-										//light.transform.localPosition = new Vector3 (-2, 0, 0);
-										center.transform.localEulerAngles = new Vector3 (0, 0, 0);
-								}
-								if (direction == "right") {
-										//light.transform.localEulerAngles = new Vector3 (0, 0, 180);
-										//light.transform.localPosition = new Vector3 (2, 0, 0);
-										center.transform.localEulerAngles = new Vector3 (0, 0, 180);
-								}
+						if (direction == "up") {
+							center.transform.localEulerAngles = new Vector3 (0, 0, 270);
+						}
+						if (direction == "down") {
+							center.transform.localEulerAngles = new Vector3 (0, 0, 90);
+							}
+						if (direction == "left") {
+							center.transform.localEulerAngles = new Vector3 (0, 0, 0);
+						}
+						if (direction == "right") {
+							center.transform.localEulerAngles = new Vector3 (0, 0, 180);
+						}
 
 
 						//dumb movement
@@ -286,13 +286,19 @@ public class playerMovementScript : MonoBehaviour {
 						isVulnerable=true;
 
 				} else {
-			if (Input.GetKey ("p") && ((Time.time - lastTimeOn) > 0.2)) {
+
+			if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
 					lastTimePaused = Time.time;
 					Time.timeScale = 1;	
 					isPaused = false;
 				}
 			}
 
+	}
+
+	void OnGUI(){
+		if(isPaused)
+			GUI.Label(new Rect(Screen.width/2-200,Screen.height/2-100,400,200),imagePause);
 	}
 
 	void OnTriggerEnter2D(Collider2D otherCollider){
