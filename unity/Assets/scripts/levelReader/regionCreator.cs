@@ -100,10 +100,13 @@ public class regionCreator : MonoBehaviour {
 
 		//spawn and camp
 		if (isSpawn) {
-			matrix [3,3] = 7;
+			matrix [6,9] = 7;
 		}
 		if (isCamp) {
-			matrix [3, 3] = 8;
+			matrix [6,9] = 8;
+			matrix[7,10]=0;
+			matrix[6,10]=0;
+			matrix[7,9]=0;
 		}
 
 

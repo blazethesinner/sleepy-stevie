@@ -261,6 +261,8 @@ public class playerMovementScript : MonoBehaviour {
 
 					//death
 					if (life<=0){
+						
+						PlayerPrefs.SetInt("timer",(int)GameObject.Find("GUI").GetComponent<GUIBarScript>().timer);
 						Application.LoadLevel ("endScreen");
 					}
 					
@@ -309,6 +311,7 @@ public class playerMovementScript : MonoBehaviour {
 		//hook up to win game screen
 		if (t != null) {
 			//tentAudio.Play(); It doesn't play the full duration
+			PlayerPrefs.SetInt("timer",(int)GameObject.Find("GUI").GetComponent<GUIBarScript>().timer);
 			PlayerPrefs.SetInt("hasWon",1);
 			Application.LoadLevel ("endScreen");
 		}

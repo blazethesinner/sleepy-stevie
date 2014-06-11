@@ -29,8 +29,8 @@ public class mapCreator : MonoBehaviour {
 	}
 
 	void fill(int [,] matrix){
-		for (int i = 1; i < 3; i++) {
-			for (int j = 1; j < 3; j++){
+		for (int i = 1; i < 4; i++) {
+			for (int j = 1; j < 4; j++){
 				matrix [i, j] = 1; //normal
 			}
 		}

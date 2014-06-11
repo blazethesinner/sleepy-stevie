@@ -13,6 +13,11 @@ public class menu : MonoBehaviour {
 	private bool isMusicOn;
 
 	public Texture textureShadow;
+	
+	public float introTimePerSlide;
+	private float introTimer;
+	
+	public Texture2D[] imagesIntro;
 
 	void Start(){
 		currentState = state.main;
@@ -20,11 +25,18 @@ public class menu : MonoBehaviour {
 		isMusicOn = true;
 	}
 
+	void Update(){
+		introTimer += Time.deltaTime;
+	}
+
+
 	void OnGUI () {
 
 		if (currentState == state.main) {
 			if (GUI.Button (new Rect (Screen.width / 2 - 150, Screen.height / 2, 300, 75), "New Game", styleButtons)) {
-				Application.LoadLevel ("game");
+				//Application.LoadLevel ("game");
+				currentState=state.intro;
+				introTimer=0;
 			}
 			if (GUI.Button (new Rect (Screen.width / 2 - 150, Screen.height / 2 + 100, 300, 75), "Options", styleButtons)) {
 				currentState = state.options;
@@ -54,10 +66,23 @@ public class menu : MonoBehaviour {
 			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height / 2 + 200, 200, 50), "Back To Menu", styleButtons))
 				currentState=state.main;
 			GameObject.Find("SleepyStevie").GetComponent<SpriteRenderer>().enabled = false;
-			moveShadow();
 			GameObject.Find("Options").GetComponent<SpriteRenderer>().enabled = true;
+			moveShadow();
+
 		}
 
+		if(currentState==state.intro) {
+			int numberSlide = (int)introTimer;
+			if (numberSlide>=imagesIntro.Length){
+				GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),imagesIntro[imagesIntro.Length-1]);
+			}
+			else {
+				GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),imagesIntro[numberSlide]);
+			}
+			if (Input.anyKeyDown){
+				Application.LoadLevel ("game");
+			}
+		}
 
 
 

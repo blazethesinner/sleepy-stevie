@@ -12,11 +12,17 @@ public class GUIBarScript : MonoBehaviour {
 	public Texture heart;
 	public Texture pearl;
 	public Texture back;
+
+	public float timer;
 	// Use this for initialization
 	void Start () {
-		
+		timer = 0;
 	}
-	
+
+	void Update (){
+		timer += Time.deltaTime;
+	}
+
 	// Update is called once per frame
 	void OnGUI () {
 			//GUI.Label (new Rect (100, 30, 100, 50), "Battery :" + ((int)LightBehaviour.batteryLife).ToString() + "%", styleButtons);
@@ -39,7 +45,7 @@ public class GUIBarScript : MonoBehaviour {
 			GUI.DrawTexture (new Rect (00, 15, 1250, 80), back);
 
 			//Timer
-			GUI.Label (new Rect (1020, 30, 100, 300), "Time :" + (int)Time.time, styleButtons);
+			GUI.Label (new Rect (1020, 30, 100, 300), "Time :" + (int)timer, styleButtons);
 
 			//Battery
 			GUI.DrawTexture (new Rect (50, 40, 100, 30), emptyBattery);
