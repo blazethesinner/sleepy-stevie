@@ -29,12 +29,12 @@ public class mapCreator : MonoBehaviour {
 	}
 
 	void fill(int [,] matrix){
-		for (int i = 1; i < 6; i++) {
-			for (int j = 1; j < 6; j++){
+		for (int i = 1; i < 3; i++) {
+			for (int j = 1; j < 3; j++){
 				matrix [i, j] = 1; //normal
 			}
 		}
-		matrix [3, 3] = 2; //spawn in middle
+		matrix [2, 2] = 2; //spawn in middle
 
 		int rd = Random.Range (0, 4); //tent in a random corner
 		switch (rd) {
@@ -42,13 +42,13 @@ public class mapCreator : MonoBehaviour {
 			matrix[1,1]=3;
 			break;
 		case 1:
-			matrix[1,5]=3;
+			matrix[1,3]=3;
 			break;
 		case 2:
-			matrix[5,1]=3;
+			matrix[3,1]=3;
 			break;
 		case 3:
-			matrix[5,5]=3;
+			matrix[3,3]=3;
 			break;
 		}
 	}

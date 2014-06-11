@@ -65,7 +65,7 @@ public class menu : MonoBehaviour {
 
 	void moveShadow(){
 		Vector3 pos = new Vector3 (Input.mousePosition.x,Input.mousePosition.y,0);
-		GUI.DrawTexture (new Rect (pos.x-3840,-600-pos.y, 7680, 2400), textureShadow);
+		GUI.DrawTexture (new Rect (pos.x-Screen.width*3,-Screen.height-pos.y, 6*Screen.width, 4*Screen.height), textureShadow);
 	}
 
 	string onOff(bool condition){

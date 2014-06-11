@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\levelReader\regionCreator.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\otherScenes\menu.cs">
     <Files>
-      <File FileName="Assets\scripts\pit.cs" Line="37" Column="20" />
-      <File FileName="Assets\scripts\playerMovementScript.cs" Line="77" Column="26" />
-      <File FileName="Assets\scripts\otherScenes\endScreen.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\levelGeneration\mapCreator.cs" Line="39" Column="52" />
-      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="107" Column="4" />
+      <File FileName="..\..\..\bubbleSlash\unity\Assets\scripts\playerPhysics.cs" Line="66" Column="23" />
+      <File FileName="..\..\..\bubbleSlash\unity\Assets\scripts\weaponInterface.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\bubbleSlash\unity\Assets\scripts\hatInterface.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\levelGeneration\mapCreator.cs" Line="51" Column="12" />
+      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="64" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
