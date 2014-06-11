@@ -73,6 +73,7 @@ public class playerMovementScript : MonoBehaviour {
 		//lightOn = map.GetComponent ("light on1");
 		//spriterenderer = GameObject.Find ("playerSprite");
 		//light = GameObject.Find ("Light");
+		Screen.showCursor = false;
 		PlayerPrefs.SetInt("hasWon",0);
 
 		isOn = true;
@@ -138,7 +139,7 @@ public class playerMovementScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isPaused) {
+				if (!isPaused) {
 						//update rendering layer
 						spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y);
 						if (isOn && LightBehaviour.batteryLife > 0) {
@@ -156,10 +157,10 @@ public class playerMovementScript : MonoBehaviour {
 										isOn = !isOn;
 										if (isOn) {
 												light.GetComponent<SpriteRenderer> ().sprite = flashlight;
-												lightOn.Play();
+												lightOn.Play ();
 										} else {
 												light.GetComponent<SpriteRenderer> ().sprite = nolight;
-												lightOff.Play();
+												lightOff.Play ();
 										}
 								}
 						}
@@ -172,11 +173,10 @@ public class playerMovementScript : MonoBehaviour {
 
 						//changing direction according to inputs
 						if (Input.GetKey ("w") && !Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
-								if (Time.time%2 == 1){
-									leftFoot.Play();
-								}
-								else{
-									rightFoot.Play();
+								if (Time.time % 2 == 1) {
+										leftFoot.Play ();
+								} else {
+										rightFoot.Play ();
 								}
 								direction = "up";	
 						}
@@ -192,22 +192,22 @@ public class playerMovementScript : MonoBehaviour {
 
 						//light position
 						if (isOn)
-							light.transform.localPosition=new Vector2(-3,0.5f);
+								light.transform.localPosition = new Vector2 (-3, 0.5f);
 						else
-							light.transform.localPosition=new Vector2(0.3f,0.2f);
+								light.transform.localPosition = new Vector2 (0.3f, 0.2f);
 
 						//light direction
 						if (direction == "up") {
-							center.transform.localEulerAngles = new Vector3 (0, 0, 270);
+								center.transform.localEulerAngles = new Vector3 (0, 0, 270);
 						}
 						if (direction == "down") {
-							center.transform.localEulerAngles = new Vector3 (0, 0, 90);
-							}
+								center.transform.localEulerAngles = new Vector3 (0, 0, 90);
+						}
 						if (direction == "left") {
-							center.transform.localEulerAngles = new Vector3 (0, 0, 0);
+								center.transform.localEulerAngles = new Vector3 (0, 0, 0);
 						}
 						if (direction == "right") {
-							center.transform.localEulerAngles = new Vector3 (0, 0, 180);
+								center.transform.localEulerAngles = new Vector3 (0, 0, 180);
 						}
 
 
@@ -216,85 +216,84 @@ public class playerMovementScript : MonoBehaviour {
 								if (Input.GetKey ("w")) {
 										transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
 										if (!myAnimator.enabled)
-											myAnimator.enabled=true;
-										myAnimator.SetInteger("direction",0);
-								}
-								else
+												myAnimator.enabled = true;
+										myAnimator.SetInteger ("direction", 0);
+								} else
 										if (myAnimator.enabled)
-											myAnimator.enabled=false;
+										myAnimator.enabled = false;
 						}
 
 						if (direction == "down") {
 								if (Input.GetKey ("s")) {
 										transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
 										if (!myAnimator.enabled)
-											myAnimator.enabled=true;
-										myAnimator.SetInteger("direction",1);
-								}
-								else
+												myAnimator.enabled = true;
+										myAnimator.SetInteger ("direction", 1);
+								} else
 										if (myAnimator.enabled)
-											myAnimator.enabled=false;
+										myAnimator.enabled = false;
 						}
 
 						if (direction == "left") {
 								if (Input.GetKey ("a")) {
 										transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
 										if (!myAnimator.enabled)
-											myAnimator.enabled=true;
-										myAnimator.SetInteger("direction",2);
-								}
-								else
+												myAnimator.enabled = true;
+										myAnimator.SetInteger ("direction", 2);
+								} else
 										if (myAnimator.enabled)
-											myAnimator.enabled=false;
+										myAnimator.enabled = false;
 						}
 						if (direction == "right") {
 								if (Input.GetKey ("d")) {
 										transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
 										if (!myAnimator.enabled)
-											myAnimator.enabled=true;
-										myAnimator.SetInteger("direction",3);
-								}
-								else
+												myAnimator.enabled = true;
+										myAnimator.SetInteger ("direction", 3);
+								} else
 									if (myAnimator.enabled)
-										myAnimator.enabled=false;
+										myAnimator.enabled = false;
 						}
 
-					//death
-					if (life<=0){
+						//death
+						if (life <= 0) {
 						
-						PlayerPrefs.SetInt("timer",(int)GameObject.Find("GUI").GetComponent<GUIBarScript>().timer);
-						Application.LoadLevel ("endScreen");
-					}
+								PlayerPrefs.SetInt ("timer", (int)GameObject.Find ("GUI").GetComponent<GUIBarScript> ().timer);
+								Application.LoadLevel ("endScreen");
+						}
 					
 
-					//swing
-					if (Input.GetKeyDown("k") && swingCoolDownTimer>swingCoolDown){
-						swingAudio.Play ();
-						swingCoolDownTimer=0f;
-						swing.GetComponent<swing>().duration = swingDuration;
-						swing.SetActive(true);
-						swing.GetComponent<swing>().startSwing();
+						//swing
+						if (Input.GetKeyDown ("k") && swingCoolDownTimer > swingCoolDown) {
+								swingAudio.Play ();
+								swingCoolDownTimer = 0f;
+								swing.GetComponent<swing> ().duration = swingDuration;
+								swing.SetActive (true);
+								swing.GetComponent<swing> ().startSwing ();
 
 				
-					}
+						}
 					
-					//timers...
+						//timers...
 					
-					swingCoolDownTimer+=Time.deltaTime;
-					hitCoolDownTimer+= Time.deltaTime;
-					if (hitCoolDownTimer>hitCoolDown)
-						isVulnerable=true;
+						swingCoolDownTimer += Time.deltaTime;
+						hitCoolDownTimer += Time.deltaTime;
+						if (hitCoolDownTimer > hitCoolDown)
+								isVulnerable = true;
 
 				} else {
 
-			if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
-					lastTimePaused = Time.time;
-					Time.timeScale = 1;	
-					isPaused = false;
+						if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
+								lastTimePaused = Time.time;
+								Time.timeScale = 1;	
+								isPaused = false;
+						}
+						if (Input.GetKeyDown ("m")) {
+							Application.LoadLevel("mainMenu");
+						}
 				}
-			}
-
 	}
+	
 
 	void OnGUI(){
 		if(isPaused)
@@ -321,30 +320,11 @@ public class playerMovementScript : MonoBehaviour {
 			PlayerPrefs.SetInt("hasWon",1);
 			Application.LoadLevel ("endScreen");
 		}
-		/*
-		if (p != null) {
-			if(playerMovementScript.life > 1){
-				playerMovementScript.life -= 1;
-			} else {
-				playerMovementScript.life = 0;
-				PlayerPrefs.SetInt("hasWon",0);
-				Application.LoadLevel ("endScreen");
-			}
-		}
-		*/
 
 	}
 
-	/* Replaced 
-	void OnGUI(){
-		GUI.Label (new Rect (100, 100, 10000, 20), "Flashlight " + LightBehaviour.batteryLife.ToString()); 
-		GUI.Label (new Rect (100, 150, 10000, 30), "Has player won? " + playerMovementScript.hasWon); 
-		GUI.Label (new Rect (100, 200, 10000, 40), "Life left " + playerMovementScript.life); 
-	}*/
-
 	public void getHit(int strenght){
 		if (isVulnerable){
-			print ("Aie ! I'm hit !");
 			life --;
 			hitCoolDownTimer=0;
 			isVulnerable=false;

@@ -72,6 +72,7 @@ public class menu : MonoBehaviour {
 		}
 
 		if(currentState==state.intro) {
+			Screen.showCursor = false;
 			int numberSlide = (int)introTimer;
 			if (numberSlide>=imagesIntro.Length){
 				GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),imagesIntro[imagesIntro.Length-1]);

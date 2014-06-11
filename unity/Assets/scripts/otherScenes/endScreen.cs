@@ -9,6 +9,7 @@ public class endScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Screen.showCursor = true;
 		int hasWonStr = PlayerPrefs.GetInt ("hasWon");
 		hasWon = (hasWonStr == 1);
 
