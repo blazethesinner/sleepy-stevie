@@ -19,10 +19,30 @@ public class menu : MonoBehaviour {
 	
 	public Texture2D[] imagesIntro;
 
+	private AudioClip clip_hammerTent;
+	private AudioSource hammerAudio;
+
+	private AudioClip clip_rustling;
+	private AudioSource rustlingAudio;
+
+	private int delay = 0;
+
+
+
 	void Start(){
 		currentState = state.main;
 		isSoundOn = true;
 		isMusicOn = true;
+
+		hammerAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_hammerTent = (AudioClip)Resources.Load ("sfx/intro");
+		hammerAudio.clip = clip_hammerTent;
+		//hammerAudio.time = 0.01F;
+
+		rustlingAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_rustling = (AudioClip)Resources.Load ("sfx/intro");
+		rustlingAudio.clip = clip_rustling;
+		//rustlingAudio.time = 2;
 	}
 
 	void Update(){
@@ -72,6 +92,9 @@ public class menu : MonoBehaviour {
 		}
 
 		if(currentState==state.intro) {
+			if(introTimer == 0){
+				hammerAudio.Play ();
+			}
 			Screen.showCursor = false;
 			int numberSlide = (int)introTimer;
 			if (numberSlide>=imagesIntro.Length){

@@ -53,6 +53,8 @@ public class playerMovementScript : MonoBehaviour {
 	private AudioSource lightOn;
 	private AudioSource lightOff;
 
+	private float lastTimeStep;
+
 	private AudioClip clip_leftFootstep;
 	private AudioClip clip_rightFootstep;
 	private AudioSource leftFoot;
@@ -66,6 +68,9 @@ public class playerMovementScript : MonoBehaviour {
 
 	private AudioClip clip_swingFL;
 	private AudioSource swingAudio;
+
+	private AudioClip clip_bunnyNoise;
+	public AudioSource bunnyCollision;
 
 	// Use this for initialization
 	void Start () {
@@ -90,8 +95,8 @@ public class playerMovementScript : MonoBehaviour {
 		lightOn.playOnAwake = false;
 		lightOff = (AudioSource)gameObject.AddComponent ("AudioSource");
 
-		clip_lightOn = (AudioClip)Resources.Load ("sfx/lightOn");
-		clip_lightOff = (AudioClip)Resources.Load ("sfx/lightOff");
+		clip_lightOn = (AudioClip)Resources.Load ("sfx/light On");
+		clip_lightOff = (AudioClip)Resources.Load ("sfx/light Off");
 
 		lightOn.clip = clip_lightOn;
 		lightOff.clip = clip_lightOff;
@@ -109,6 +114,7 @@ public class playerMovementScript : MonoBehaviour {
 		batteryAudio.clip = clip_batteryGet;
 
 		//Feet sounds
+		lastTimeStep = Time.time;
 		leftFoot = (AudioSource)gameObject.AddComponent ("AudioSource");
 		rightFoot = (AudioSource)gameObject.AddComponent ("AudioSource");
 		
@@ -116,7 +122,9 @@ public class playerMovementScript : MonoBehaviour {
 		clip_rightFootstep = (AudioClip)Resources.Load ("sfx/right_footstep");
 
 		leftFoot.clip = clip_leftFootstep;
+		leftFoot.time = 1;
 		rightFoot.clip = clip_rightFootstep;
+		rightFoot.time = 1;
 
 		//debugging, can be removed
 		if (!rightFoot || !rightFoot.clip) {
@@ -135,163 +143,170 @@ public class playerMovementScript : MonoBehaviour {
 		clip_swingFL = (AudioClip)Resources.Load ("sfx/FL_swing");
 		swingAudio.clip = clip_swingFL;
 
+		//bunny sounds
+		bunnyCollision = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_bunnyNoise = (AudioClip)Resources.Load ("sfx/rabbit");
+		bunnyCollision.clip = clip_bunnyNoise;
+		bunnyCollision.time = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-				if (!isPaused) {
-						//update rendering layer
-						spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y);
-						if (isOn && LightBehaviour.batteryLife > 0) {
-								LightBehaviour.batteryLife -= Time.deltaTime * batteryDropRate; 
-						}
-						if (LightBehaviour.batteryLife <= 0) {
-								isOn = false;
-								LightBehaviour.batteryLife = 0;
-								//light.transform.localEulerAngles = new Vector3 (0, 0, 0);
-								//light.transform.localPosition = new Vector3 (3, -1, 0);
-								light.GetComponent<SpriteRenderer> ().sprite = nolight; //added this to your code : making light turning off properly :p
-						} else {
-								if (Input.GetKey ("space") && ((Time.time - lastTimeOn) > 0.2)) {
-										lastTimeOn = Time.time;
-										isOn = !isOn;
-										if (isOn) {
-												light.GetComponent<SpriteRenderer> ().sprite = flashlight;
-												lightOn.Play ();
-										} else {
-												light.GetComponent<SpriteRenderer> ().sprite = nolight;
-												lightOff.Play ();
-										}
-								}
-						}
-						//pause game
-						if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
-								lastTimePaused = Time.time;
-								Time.timeScale = 0;	
-								isPaused = true;
-						}
-
-						//changing direction according to inputs
-						if (Input.GetKey ("w") && !Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
-								if (Time.time % 2 == 1) {
-										leftFoot.Play ();
-								} else {
-										rightFoot.Play ();
-								}
-								direction = "up";	
-						}
-						if (!Input.GetKey ("w") && Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
-								direction = "down";
-						}
-						if (!Input.GetKey ("w") && !Input.GetKey ("s") && Input.GetKey ("a") && !Input.GetKey ("d")) {
-								direction = "left";
-						}
-						if (!Input.GetKey ("w") && !Input.GetKey ("s") && !Input.GetKey ("a") && Input.GetKey ("d")) {
-								direction = "right";
-						}
-
-						//light position
-						if (isOn)
-								light.transform.localPosition = new Vector2 (-3, 0.5f);
-						else
-								light.transform.localPosition = new Vector2 (0.3f, 0.2f);
-
-						//light direction
-						if (direction == "up") {
-								center.transform.localEulerAngles = new Vector3 (0, 0, 270);
-						}
-						if (direction == "down") {
-								center.transform.localEulerAngles = new Vector3 (0, 0, 90);
-						}
-						if (direction == "left") {
-								center.transform.localEulerAngles = new Vector3 (0, 0, 0);
-						}
-						if (direction == "right") {
-								center.transform.localEulerAngles = new Vector3 (0, 0, 180);
-						}
-
-
-						//dumb movement
-						if (direction == "up") {
-								if (Input.GetKey ("w")) {
-										transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
-										if (!myAnimator.enabled)
-												myAnimator.enabled = true;
-										myAnimator.SetInteger ("direction", 0);
-								} else
-										if (myAnimator.enabled)
-										myAnimator.enabled = false;
-						}
-
-						if (direction == "down") {
-								if (Input.GetKey ("s")) {
-										transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
-										if (!myAnimator.enabled)
-												myAnimator.enabled = true;
-										myAnimator.SetInteger ("direction", 1);
-								} else
-										if (myAnimator.enabled)
-										myAnimator.enabled = false;
-						}
-
-						if (direction == "left") {
-								if (Input.GetKey ("a")) {
-										transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
-										if (!myAnimator.enabled)
-												myAnimator.enabled = true;
-										myAnimator.SetInteger ("direction", 2);
-								} else
-										if (myAnimator.enabled)
-										myAnimator.enabled = false;
-						}
-						if (direction == "right") {
-								if (Input.GetKey ("d")) {
-										transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
-										if (!myAnimator.enabled)
-												myAnimator.enabled = true;
-										myAnimator.SetInteger ("direction", 3);
-								} else
-									if (myAnimator.enabled)
-										myAnimator.enabled = false;
-						}
-
-						//death
-						if (life <= 0) {
-						
-								PlayerPrefs.SetInt ("timer", (int)GameObject.Find ("GUI").GetComponent<GUIBarScript> ().timer);
-								Application.LoadLevel ("endScreen");
-						}
-					
-
-						//swing
-						if (Input.GetKeyDown ("k") && swingCoolDownTimer > swingCoolDown) {
-								swingAudio.Play ();
-								swingCoolDownTimer = 0f;
-								swing.GetComponent<swing> ().duration = swingDuration;
-								swing.SetActive (true);
-								swing.GetComponent<swing> ().startSwing ();
-
-				
-						}
-					
-						//timers...
-					
-						swingCoolDownTimer += Time.deltaTime;
-						hitCoolDownTimer += Time.deltaTime;
-						if (hitCoolDownTimer > hitCoolDown)
-								isVulnerable = true;
-
-				} else {
-
-						if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
-								lastTimePaused = Time.time;
-								Time.timeScale = 1;	
-								isPaused = false;
-						}
-						if (Input.GetKeyDown ("m")) {
-							Application.LoadLevel("mainMenu");
-						}
+		if (!isPaused) {
+			//update rendering layer
+			spriterenderer.GetComponent<SpriteRenderer> ().sortingOrder = (int)(-2 * transform.position.y);
+			if (isOn && LightBehaviour.batteryLife > 0) {
+				LightBehaviour.batteryLife -= Time.deltaTime * batteryDropRate; 
+			}
+			if (LightBehaviour.batteryLife <= 0) {
+				isOn = false;
+				LightBehaviour.batteryLife = 0;
+				//light.transform.localEulerAngles = new Vector3 (0, 0, 0);
+				//light.transform.localPosition = new Vector3 (3, -1, 0);
+				light.GetComponent<SpriteRenderer> ().sprite = nolight; //added this to your code : making light turning off properly :p
+			} else {
+				if (Input.GetKey ("space") && ((Time.time - lastTimeOn) > 0.2)) {
+					lastTimeOn = Time.time;
+					isOn = !isOn;
+					if (isOn) {
+							light.GetComponent<SpriteRenderer> ().sprite = flashlight;
+							lightOn.Play ();
+					} else {
+							light.GetComponent<SpriteRenderer> ().sprite = nolight;
+							lightOff.Play ();
+					}
 				}
+			}
+			//pause game
+			if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
+				lastTimePaused = Time.time;
+				Time.timeScale = 0;	
+				isPaused = true;
+			}
+
+			//changing direction according to inputs
+			if (Input.GetKey ("w") && !Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
+				if (Time.time % 2 == 1 && (Time.time - lastTimeStep) > 0.2) {
+						leftFoot.Play ();
+					Debug.LogError ("Left foot played");
+				} else if(Time.time % 2 == 0 && (Time.time - lastTimeStep) > 0.2) {
+						rightFoot.Play ();
+					Debug.LogError ("Right foot played");
+				}
+				lastTimeStep = Time.time;
+				direction = "up";	
+			}
+			if (!Input.GetKey ("w") && Input.GetKey ("s") && !Input.GetKey ("a") && !Input.GetKey ("d")) {
+				direction = "down";
+			}
+			if (!Input.GetKey ("w") && !Input.GetKey ("s") && Input.GetKey ("a") && !Input.GetKey ("d")) {
+				direction = "left";
+			}
+			if (!Input.GetKey ("w") && !Input.GetKey ("s") && !Input.GetKey ("a") && Input.GetKey ("d")) {
+				direction = "right";
+			}
+
+			//light position
+			if (isOn)
+				light.transform.localPosition = new Vector2 (-3, 0.5f);
+			else
+				light.transform.localPosition = new Vector2 (0.3f, 0.2f);
+
+			//light direction
+			if (direction == "up") {
+				center.transform.localEulerAngles = new Vector3 (0, 0, 270);
+			}
+			if (direction == "down") {
+				center.transform.localEulerAngles = new Vector3 (0, 0, 90);
+			}
+			if (direction == "left") {
+				center.transform.localEulerAngles = new Vector3 (0, 0, 0);
+			}
+			if (direction == "right") {
+				center.transform.localEulerAngles = new Vector3 (0, 0, 180);
+			}
+
+
+			//dumb movement
+			if (direction == "up") {
+					if (Input.GetKey ("w")) {
+						transform.Translate (Vector2.up * walkSpeed * Time.deltaTime);
+						if (!myAnimator.enabled)
+							myAnimator.enabled = true;
+						myAnimator.SetInteger ("direction", 0);
+					} else
+						if (myAnimator.enabled)
+							myAnimator.enabled = false;
+			}
+
+			if (direction == "down") {
+				if (Input.GetKey ("s")) {
+					transform.Translate (-Vector2.up * walkSpeed * Time.deltaTime);
+					if (!myAnimator.enabled)
+						myAnimator.enabled = true;
+					myAnimator.SetInteger ("direction", 1);
+				} else
+					if (myAnimator.enabled)
+						myAnimator.enabled = false;
+			}
+
+			if (direction == "left") {
+				if (Input.GetKey ("a")) {
+					transform.Translate (-Vector2.right * walkSpeed * Time.deltaTime);
+					if (!myAnimator.enabled)
+						myAnimator.enabled = true;
+					myAnimator.SetInteger ("direction", 2);
+				} else
+					if (myAnimator.enabled)
+						myAnimator.enabled = false;
+			}
+			if (direction == "right") {
+				if (Input.GetKey ("d")) {
+					transform.Translate (Vector2.right * walkSpeed * Time.deltaTime);
+					if (!myAnimator.enabled)
+						myAnimator.enabled = true;
+					myAnimator.SetInteger ("direction", 3);
+				} else
+					if (myAnimator.enabled)
+						myAnimator.enabled = false;
+			}
+
+			//death
+			if (life <= 0) {
+				PlayerPrefs.SetInt ("timer", (int)GameObject.Find ("GUI").GetComponent<GUIBarScript> ().timer);
+				Application.LoadLevel ("endScreen");
+			}
+		
+
+			//swing
+			if (Input.GetKeyDown ("k") && swingCoolDownTimer > swingCoolDown) {
+				swingAudio.Play ();
+				swingCoolDownTimer = 0f;
+				swing.GetComponent<swing> ().duration = swingDuration;
+				swing.SetActive (true);
+				swing.GetComponent<swing> ().startSwing ();
+			}
+		
+			//timers...
+		
+			swingCoolDownTimer += Time.deltaTime;
+			hitCoolDownTimer += Time.deltaTime;
+			if (hitCoolDownTimer > hitCoolDown)
+				isVulnerable = true;
+
+		} else {
+			if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
+				lastTimePaused = Time.time;
+				Time.timeScale = 1;	
+				isPaused = false;
+			}
+			if (Input.GetKeyDown ("m")) {
+				Application.LoadLevel("mainMenu");
+				Screen.showCursor = true;
+				lastTimePaused = 0;
+				isPaused = false;
+			}
+		}
 	}
 	
 
@@ -328,6 +343,8 @@ public class playerMovementScript : MonoBehaviour {
 			life --;
 			hitCoolDownTimer=0;
 			isVulnerable=false;
+			//bunnyCollision.time = 1;
+			//bunnyCollision.Play();
 		}
 	}
 
