@@ -25,9 +25,11 @@ public class ennemyBoxes : MonoBehaviour {
 			//if(this.gameObject == rabbit){
 				if(other.gameObject.GetComponent<playerMovementScript>().isVulnerable){
 					if (animal.GetComponent<RabbitBehaviour>().myType==RabbitBehaviour.animalType.rabbit)
-				    	other.gameObject.GetComponent<playerMovementScript>().bunnyCollision.Play();
+						if (PlayerPrefs.GetString ("sound") == "On")
+				    		other.gameObject.GetComponent<playerMovementScript>().bunnyCollision.Play();
 					if (animal.GetComponent<RabbitBehaviour>().myType==RabbitBehaviour.animalType.bear)
-						other.gameObject.GetComponent<playerMovementScript>().bearCollision.Play();
+						if (PlayerPrefs.GetString ("sound") == "On")
+							other.gameObject.GetComponent<playerMovementScript>().bearCollision.Play();
 				}
 			//}
 			other.gameObject.GetComponent<playerMovementScript> ().getHit (animal.GetComponent<RabbitBehaviour> ().strength);

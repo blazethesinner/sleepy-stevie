@@ -41,7 +41,8 @@ public class pit : MonoBehaviour
 									other.gameObject.GetComponent<playerMovementScript> ().getHit (1);
 									isReady = false;
 									reset=0f;
-									trap.Play();
+									if (PlayerPrefs.GetString ("sound") == "On")
+										trap.Play();
 								}
 						}
 						if (other.gameObject.tag == "ennemies") {

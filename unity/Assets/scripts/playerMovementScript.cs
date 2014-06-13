@@ -75,6 +75,10 @@ public class playerMovementScript : MonoBehaviour {
 	private AudioClip clip_bearNoise;
 	public AudioSource bearCollision;
 
+	void OnEnable(){
+		isPaused = false;
+	}
+
 	// Use this for initialization
 	void Start () {
 
@@ -179,9 +183,11 @@ public class playerMovementScript : MonoBehaviour {
 					isOn = !isOn;
 					if (isOn) {
 							light.GetComponent<SpriteRenderer> ().sprite = flashlight;
+						if (PlayerPrefs.GetString ("sound") == "On")
 							lightOn.Play ();
 					} else {
 							light.GetComponent<SpriteRenderer> ().sprite = nolight;
+						if (PlayerPrefs.GetString ("sound") == "On")
 							lightOff.Play ();
 					}
 				}
@@ -289,7 +295,8 @@ public class playerMovementScript : MonoBehaviour {
 
 			//swing
 			if (Input.GetKeyDown ("k") && swingCoolDownTimer > swingCoolDown) {
-				swingAudio.Play ();
+				if (PlayerPrefs.GetString ("sound") == "On")
+					swingAudio.Play ();
 				swingCoolDownTimer = 0f;
 				swing.GetComponent<swing> ().duration = swingDuration;
 				swing.SetActive (true);
@@ -310,9 +317,11 @@ public class playerMovementScript : MonoBehaviour {
 				isPaused = false;
 			}
 			if (Input.GetKeyDown ("m")) {
+				Time.timeScale =1;
 				Screen.showCursor = true;
 				//lastTimePaused = 0;
 				//isPaused = false;
+				//PlayerPrefs.SetInt("hasWon",0);
 				Application.LoadLevel("mainMenu");
 			}
 		}
@@ -334,7 +343,8 @@ public class playerMovementScript : MonoBehaviour {
 			if(LightBehaviour.batteryLife > 100){
 				LightBehaviour.batteryLife = 100;
 			}
-			batteryAudio.Play();
+			if (PlayerPrefs.GetString ("sound") == "On")
+				batteryAudio.Play();
 			Destroy(bat.gameObject);
 		}
 		//hook up to win game screen

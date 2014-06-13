@@ -15,7 +15,7 @@ public class menu : MonoBehaviour {
 	public Texture textureShadow;
 	
 	public float introTimePerSlide;
-	private float introTimer;
+	public float introTimer;
 	
 	public Texture2D[] imagesIntro;
 
@@ -27,6 +27,8 @@ public class menu : MonoBehaviour {
 
 	void Start(){
 		currentState = state.main;
+		PlayerPrefs.SetString("music","On");
+		PlayerPrefs.SetString("sound","On");
 		isSoundOn = true;
 		isMusicOn = true;
 
@@ -95,7 +97,8 @@ public class menu : MonoBehaviour {
 
 		if(currentState==state.intro) {
 			if(introTimer == 0){
-				hammerAudio.Play ();
+				if (PlayerPrefs.GetString ("sound") == "On")
+					hammerAudio.Play ();
 			}
 			Screen.showCursor = false;
 			int numberSlide = (int)(introTimer/introTimePerSlide);

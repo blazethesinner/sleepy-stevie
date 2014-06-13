@@ -1,13 +1,19 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\otherScenes\menu.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\playerMovementScript.cs">
     <Files>
-      <File FileName="Assets\scripts\ennemies\RabbitBehaviour.cs" Line="7" Column="27" />
-      <File FileName="Assets\ennemyBoxes.cs" Line="27" Column="57" />
-      <File FileName="Assets\scripts\playerMovementScript.cs" Line="361" Column="1" />
-      <File FileName="Assets\scripts\levelReader\regionCreator.cs" Line="62" Column="12" />
-      <File FileName="Assets\scripts\levelGeneration\mapCreator.cs" Line="24" Column="56" />
-      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="41" Column="48" />
+      <File FileName="Assets\scripts\GUIBarScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\ennemies\RabbitBehaviour.cs" Line="331" Column="36" />
+      <File FileName="Assets\scripts\playerMovementScript.cs" Line="326" Column="5" />
+      <File FileName="Assets\scripts\battery.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\LightBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\pit.cs" Line="45" Column="11" />
+      <File FileName="Assets\scripts\tent.cs" Line="1" Column="1" />
+      <File FileName="Assets\fileReader.cs" Line="1" Column="1" />
+      <File FileName="Assets\swing.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\otherScenes\options.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\otherScenes\endScreen.cs" Line="36" Column="2" />
+      <File FileName="Assets\scripts\otherScenes\menu.cs" Line="36" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -328,7 +328,8 @@ public class RabbitBehaviour :  MonoBehaviour {
 	}
 
 	public void getHit(string direction){
-		smackAudio.Play();
+		if (PlayerPrefs.GetString ("sound") == "On")
+			smackAudio.Play();
 		print (gameObject.name + " smashed");
 		myBehaviour = behaviour.pushed;
 		timerPushed = 0f;

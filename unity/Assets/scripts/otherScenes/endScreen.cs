@@ -27,9 +27,11 @@ public class endScreen : MonoBehaviour {
 		clip_playerLost = (AudioClip)Resources.Load ("sfx/scream");
 		losingAudio.clip = clip_playerLost;
 		if(hasWon)
-			winningAudio.Play ();
+			if (PlayerPrefs.GetString ("sound") == "On")
+				winningAudio.Play ();
 		else
-			losingAudio.Play();
+			if (PlayerPrefs.GetString ("sound") == "On")
+				losingAudio.Play();
 	}
 	
 	// Update is called once per frame
