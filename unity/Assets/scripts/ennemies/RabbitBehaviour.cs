@@ -3,6 +3,9 @@ using System.Collections;
 
 public class RabbitBehaviour :  MonoBehaviour {
 
+	public enum animalType {rabbit, bear};
+	public animalType myType;
+
 	//characteristics
 	public int maxHealth;
 	public int walkSpeed;

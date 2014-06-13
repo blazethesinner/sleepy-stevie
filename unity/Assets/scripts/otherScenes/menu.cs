@@ -33,21 +33,22 @@ public class menu : MonoBehaviour {
 		hammerAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
 		clip_hammerTent = (AudioClip)Resources.Load ("sfx/intro");
 		hammerAudio.clip = clip_hammerTent;
-
-
-		mainTrack = (AudioSource)gameObject.GetComponent ("Main Camera").audio;
 	}
 
 	void Update(){
 		introTimer += Time.deltaTime;
-		if (isMusicOn) {
-						//print ("rabbit killed");
-						mainTrack.Stop ();
-				}
-				else{
-			//print ("rabbit killed");
-						mainTrack.Play ();
+
+		if (PlayerPrefs.GetString ("music") == "Off") {
+			GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled=false;
 		}
+		else {
+			GameObject.Find("Main Camera").GetComponent<AudioSource>().enabled=true;
+		}
+	}
+
+	void OnApplicationQuit(){
+		PlayerPrefs.SetString("music","On");
+		PlayerPrefs.SetString("sound","On");
 	}
 
 
@@ -68,7 +69,7 @@ public class menu : MonoBehaviour {
 			GameObject.Find("SleepyStevie").GetComponent<SpriteRenderer>().enabled = true;
 			GameObject.Find("Options").GetComponent<SpriteRenderer>().enabled = false;
 			moveShadow();
-			//GUI.Label (new Rect (100, 100, 760, 100), "Sleepy Stevie", titleStyle);
+
 		}
 
 		if (currentState == state.options) {
@@ -97,7 +98,7 @@ public class menu : MonoBehaviour {
 				hammerAudio.Play ();
 			}
 			Screen.showCursor = false;
-			int numberSlide = (int)introTimer;
+			int numberSlide = (int)(introTimer/introTimePerSlide);
 			if (numberSlide>=imagesIntro.Length){
 				GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),imagesIntro[imagesIntro.Length-1]);
 			}

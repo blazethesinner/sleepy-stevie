@@ -72,6 +72,9 @@ public class playerMovementScript : MonoBehaviour {
 	private AudioClip clip_bunnyNoise;
 	public AudioSource bunnyCollision;
 
+	private AudioClip clip_bearNoise;
+	public AudioSource bearCollision;
+
 	// Use this for initialization
 	void Start () {
 
@@ -149,6 +152,11 @@ public class playerMovementScript : MonoBehaviour {
 		clip_bunnyNoise = (AudioClip)Resources.Load ("sfx/rabbit");
 		bunnyCollision.clip = clip_bunnyNoise;
 		bunnyCollision.time = 1;
+
+		bearCollision = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_bearNoise = (AudioClip)Resources.Load ("sfx/bear");
+		bearCollision.clip = clip_bearNoise;
+		bearCollision.time = 1;
 	}
 	
 	// Update is called once per frame

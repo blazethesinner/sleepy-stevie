@@ -20,6 +20,14 @@ public class mapCreator : MonoBehaviour {
 		fill (matrix);
 		complete (matrix);
 		createAreas (matrix);
+
+		print ("music = " + PlayerPrefs.GetString ("music"));
+		if (PlayerPrefs.GetString ("music") == "Off") {
+			GetComponent<AudioSource>().enabled=false;
+		}
+		else {
+			GetComponent<AudioSource>().enabled=true;
+		}
 		//GameObject.Find ("player").transform.position = new Vector3 (20, 20, 0);
 	}
 	
