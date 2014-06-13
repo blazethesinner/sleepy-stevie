@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: 3966c2f5fb76395489522104be28ad67
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: bunny animation_0
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 3588
+        width: 497
+        height: 994
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_1
+      rect:
+        serializedVersion: 2
+        x: 1577
+        y: 3593
+        width: 502
+        height: 1022
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_2
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 3593
+        width: 493
+        height: 989
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_3
+      rect:
+        serializedVersion: 2
+        x: 3907
+        y: 3593
+        width: 488
+        height: 1022
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_4
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 2398
+        width: 497
+        height: 989
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_5
+      rect:
+        serializedVersion: 2
+        x: 1577
+        y: 2393
+        width: 504
+        height: 1041
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_6
+      rect:
+        serializedVersion: 2
+        x: 2730
+        y: 2398
+        width: 495
+        height: 989
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_7
+      rect:
+        serializedVersion: 2
+        x: 3900
+        y: 2398
+        width: 506
+        height: 1036
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_8
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 1198
+        width: 529
+        height: 989
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_9
+      rect:
+        serializedVersion: 2
+        x: 1545
+        y: 1198
+        width: 537
+        height: 979
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_10
+      rect:
+        serializedVersion: 2
+        x: 2704
+        y: 1193
+        width: 528
+        height: 989
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_11
+      rect:
+        serializedVersion: 2
+        x: 3912
+        y: 1202
+        width: 529
+        height: 980
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_12
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 0
+        width: 525
+        height: 987
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_13
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 2
+        width: 530
+        height: 980
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_14
+      rect:
+        serializedVersion: 2
+        x: 2843
+        y: 0
+        width: 530
+        height: 987
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: bunny animation_15
+      rect:
+        serializedVersion: 2
+        x: 4066
+        y: 0
+        width: 530
+        height: 973
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 

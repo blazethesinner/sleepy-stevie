@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: d2b23aec46c320f4ba8358620bf51dbb
+TextureImporter:
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: animation compilation_0
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 3593
+        width: 566
+        height: 869
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_1
+      rect:
+        serializedVersion: 2
+        x: 1475
+        y: 3593
+        width: 571
+        height: 912
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_2
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 3593
+        width: 563
+        height: 874
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_3
+      rect:
+        serializedVersion: 2
+        x: 3898
+        y: 3593
+        width: 557
+        height: 904
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_4
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 2398
+        width: 591
+        height: 846
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_5
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 2398
+        width: 588
+        height: 853
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_6
+      rect:
+        serializedVersion: 2
+        x: 2651
+        y: 2398
+        width: 590
+        height: 834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_7
+      rect:
+        serializedVersion: 2
+        x: 3860
+        y: 2398
+        width: 581
+        height: 857
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_8
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 1198
+        width: 691
+        height: 867
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_9
+      rect:
+        serializedVersion: 2
+        x: 1484
+        y: 1202
+        width: 692
+        height: 863
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_10
+      rect:
+        serializedVersion: 2
+        x: 2693
+        y: 1200
+        width: 680
+        height: 881
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_11
+      rect:
+        serializedVersion: 2
+        x: 3888
+        y: 1199
+        width: 708
+        height: 894
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_12
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 0
+        width: 680
+        height: 865
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_13
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 0
+        width: 685
+        height: 864
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_14
+      rect:
+        serializedVersion: 2
+        x: 2637
+        y: 0
+        width: 679
+        height: 865
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: animation compilation_15
+      rect:
+        serializedVersion: 2
+        x: 3806
+        y: 0
+        width: 710
+        height: 888
+      alignment: 0
+      pivot: {x: 0, y: 0}
+  spritePackingTag: 
+  userData: 
