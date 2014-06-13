@@ -7,12 +7,29 @@ public class endScreen : MonoBehaviour {
 	public GUIStyle styleTimer;
 	private bool hasWon;
 
+	private AudioClip clip_playerWon;
+	public AudioSource winningAudio;
+	private AudioClip clip_playerLost;
+	public AudioSource losingAudio;
+
+
 	// Use this for initialization
 	void Start () {
 		Screen.showCursor = true;
 		int hasWonStr = PlayerPrefs.GetInt ("hasWon");
 		hasWon = (hasWonStr == 1);
 
+		winningAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_playerLost = (AudioClip)Resources.Load ("sfx/MattWin");
+		winningAudio.clip = clip_playerLost;
+
+		losingAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_playerLost = (AudioClip)Resources.Load ("sfx/scream");
+		losingAudio.clip = clip_playerLost;
+		if(hasWon)
+			winningAudio.Play ();
+		else
+			losingAudio.Play();
 	}
 	
 	// Update is called once per frame

@@ -79,7 +79,7 @@ public class regionCreator : MonoBehaviour {
 					GameObject thisPit = (GameObject)Object.Instantiate(pit, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					thisPit.GetComponentInChildren<SpriteRenderer>().sortingOrder =(int)( - 2*(i+transform.position.y));
 					break;
-				case 10 : //bear
+				case 4 : //bear
 					GameObject thisBear = (GameObject)Object.Instantiate(bear, new Vector3(j+transform.position.x,i+transform.position.y,0), Quaternion.identity);
 					break;
 				default :

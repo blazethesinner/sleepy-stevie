@@ -22,8 +22,10 @@ public class ennemyBoxes : MonoBehaviour {
 		if (other.gameObject.tag=="obstacle")
 			rabbit.SendMessage (this.name+"stay");
 		if (other.gameObject.tag == "Player") {
-			if(other.gameObject.GetComponent<playerMovementScript>().isVulnerable)
-				other.gameObject.GetComponent<playerMovementScript>().bunnyCollision.Play();
+			//if(this.gameObject == rabbit){
+				if(other.gameObject.GetComponent<playerMovementScript>().isVulnerable)
+					other.gameObject.GetComponent<playerMovementScript>().bunnyCollision.Play();
+			//}
 			other.gameObject.GetComponent<playerMovementScript> ().getHit (rabbit.GetComponent<RabbitBehaviour> ().strength);
 		}
 	}

@@ -9,8 +9,8 @@ public class menu : MonoBehaviour {
 	enum state{main, options, intro};
 	private state currentState;
 
-	private bool isSoundOn;
-	private bool isMusicOn;
+	public bool isSoundOn;
+	public bool isMusicOn;
 
 	public Texture textureShadow;
 	
@@ -22,11 +22,7 @@ public class menu : MonoBehaviour {
 	private AudioClip clip_hammerTent;
 	private AudioSource hammerAudio;
 
-	private AudioClip clip_rustling;
-	private AudioSource rustlingAudio;
-
-	private int delay = 0;
-
+	private AudioSource mainTrack;
 
 
 	void Start(){
@@ -37,16 +33,21 @@ public class menu : MonoBehaviour {
 		hammerAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
 		clip_hammerTent = (AudioClip)Resources.Load ("sfx/intro");
 		hammerAudio.clip = clip_hammerTent;
-		//hammerAudio.time = 0.01F;
 
-		rustlingAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
-		clip_rustling = (AudioClip)Resources.Load ("sfx/intro");
-		rustlingAudio.clip = clip_rustling;
-		//rustlingAudio.time = 2;
+
+		mainTrack = (AudioSource)gameObject.GetComponent ("Main Camera").audio;
 	}
 
 	void Update(){
 		introTimer += Time.deltaTime;
+		if (isMusicOn) {
+						//print ("rabbit killed");
+						mainTrack.Stop ();
+				}
+				else{
+			//print ("rabbit killed");
+						mainTrack.Play ();
+		}
 	}
 
 

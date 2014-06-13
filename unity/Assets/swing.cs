@@ -7,6 +7,7 @@ public class swing : MonoBehaviour {
 	public float timer;
 	public playerMovementScript player;
 	public string direction;
+
 	// Use this for initialization
 	void OnEnable () {
 
@@ -15,13 +16,14 @@ public class swing : MonoBehaviour {
 	public void startSwing(){
 		timer = 0;
 		direction = player.direction;
+
 	}
 
 	public void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "ennemies") {
-			print(other.gameObject.transform.parent.gameObject.name);
-			other.gameObject.transform.parent.gameObject.GetComponent<RabbitBehaviour>().getHit(direction);
-		}
+						print (other.gameObject.transform.parent.gameObject.name);
+						other.gameObject.transform.parent.gameObject.GetComponent<RabbitBehaviour> ().getHit (direction);
+				} 
 	}
 
 

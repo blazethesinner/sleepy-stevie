@@ -19,7 +19,7 @@ public class playerMovementScript : MonoBehaviour {
 
 	//public AudioSource lightOn;
 
-	public bool isPaused = false;
+	public bool isPaused;// = false;
 	private float lastTimePaused;
 
 	public Animator myAnimator;
@@ -74,10 +74,12 @@ public class playerMovementScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		//GameObject map = GameObject.Find ("map");
 		//lightOn = map.GetComponent ("light on1");
 		//spriterenderer = GameObject.Find ("playerSprite");
 		//light = GameObject.Find ("Light");
+		isPaused = false;
 		Screen.showCursor = false;
 		PlayerPrefs.SetInt("hasWon",0);
 
@@ -132,7 +134,6 @@ public class playerMovementScript : MonoBehaviour {
 			return;
 		}
 
-
 		//tent sounds
 		tentAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
 		clip_tentGet = (AudioClip)Resources.Load ("sfx/win state");
@@ -178,7 +179,7 @@ public class playerMovementScript : MonoBehaviour {
 				}
 			}
 			//pause game
-			if (Input.GetKeyDown ("p") && ((Time.time - lastTimeOn) > 0.2)) {
+			if (Input.GetKeyDown ("p") && ((Time.time - lastTimePaused) > 0.2)) {
 				lastTimePaused = Time.time;
 				Time.timeScale = 0;	
 				isPaused = true;
@@ -301,10 +302,10 @@ public class playerMovementScript : MonoBehaviour {
 				isPaused = false;
 			}
 			if (Input.GetKeyDown ("m")) {
-				Application.LoadLevel("mainMenu");
 				Screen.showCursor = true;
-				lastTimePaused = 0;
-				isPaused = false;
+				//lastTimePaused = 0;
+				//isPaused = false;
+				Application.LoadLevel("mainMenu");
 			}
 		}
 	}

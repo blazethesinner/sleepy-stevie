@@ -45,6 +45,9 @@ public class RabbitBehaviour :  MonoBehaviour {
 	public string directionPushed;
 	public float pushDuration;
 	private float timerPushed;
+	
+	private AudioClip clip_smack;
+	private AudioSource smackAudio;
 
 	// Use this for initialization
 	public static string toString(state sta){
@@ -80,6 +83,9 @@ public class RabbitBehaviour :  MonoBehaviour {
 			myOrder=order.down;
 			break;
 		}
+		smackAudio = (AudioSource)gameObject.AddComponent ("AudioSource");
+		clip_smack = (AudioClip)Resources.Load ("sfx/smack");
+		smackAudio.clip = clip_smack;
 	}
 
 	void Update(){
@@ -319,6 +325,7 @@ public class RabbitBehaviour :  MonoBehaviour {
 	}
 
 	public void getHit(string direction){
+		smackAudio.Play();
 		print (gameObject.name + " smashed");
 		myBehaviour = behaviour.pushed;
 		timerPushed = 0f;
